@@ -2,24 +2,37 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema();
 
 const BookSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
     author: {
         type: String,
+        required: true
     },
-    photo: {
+    picture: {
         type: String,
-        required: true,
+        required: true
     },
     review: {
-        type: String,
+        type: String
     },
-    likes: [{
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+        ref: 'User',
+        required: true
+    },
+    genres: [
+        {
+            type: String
+        }
+    ]
 }, {timestamps: true});
 
 module.exports = mongoose.model("Book", BookSchema);

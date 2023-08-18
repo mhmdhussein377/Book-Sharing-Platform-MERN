@@ -20,7 +20,19 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         min: 6
-    }
+    },
+    following: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ],
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
+        }
+    ]
 }, {timestamps: true});
 
 module.exports = mongoose.model("User", UserSchema);

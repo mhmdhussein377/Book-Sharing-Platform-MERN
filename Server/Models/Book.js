@@ -8,6 +8,7 @@ const BookSchema = new Schema({
     },
     author: {
         type: String,
+        index: true,
         required: true
     },
     picture: {
@@ -15,7 +16,8 @@ const BookSchema = new Schema({
         required: true
     },
     review: {
-        type: String
+        type: String,
+        idnex: true
     },
     likes: [
         {
@@ -30,7 +32,8 @@ const BookSchema = new Schema({
     },
     genres: [
         {
-            type: String
+            type: String,
+            index: true
         }
     ]
 }, {timestamps: true});

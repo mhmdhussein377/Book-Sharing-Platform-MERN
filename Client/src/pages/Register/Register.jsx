@@ -1,7 +1,33 @@
+import {useState} from 'react';
 import './index.css'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+import axios from "axios"
 
 const Register = () => {
+
+    let [inputs,
+        setInputs] = useState({})
+    const navigate = useNavigate()
+
+    const handleChange = (e) => {
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+
+        try {
+            console.log(inputs)
+            let {data} = await axios.post("http://localhost:5000/api/register", inputs)
+            navigate("/login")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="register">
             <div className="container">
@@ -10,24 +36,44 @@ const Register = () => {
                         <h1>Register</h1>
                         <div className="line"></div>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="input">
                             <label htmlFor="name">Name</label>
-                            <input type="text" id="name"/>
+                            <input
+                                onChange={(e) => handleChange(e)}
+                                name="name"
+                                type="text"
+                                required
+                                id="name"/>
                         </div>
                         <div className="input">
                             <label htmlFor="username">Username</label>
-                            <input type="text" id="username"/>
+                            <input
+                                onChange={(e) => handleChange(e)}
+                                name="username"
+                                type="text"
+                                required
+                                id="username"/>
                         </div>
                         <div className="input">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email"/>
+                            <input
+                                onChange={(e) => handleChange(e)}
+                                name="email"
+                                type="email"
+                                required
+                                id="email"/>
                         </div>
                         <div className="input">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password"/>
+                            <input
+                                onChange={(e) => handleChange(e)}
+                                name="password"
+                                type="password"
+                                required
+                                id="password"/>
                         </div>
-                        <div className='to-login'>
+                        <div className="to-login">
                             Already have an account?
                             <Link to="/login">Login</Link>
                         </div>

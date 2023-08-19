@@ -3,10 +3,10 @@ POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {
-    "name": "Ahmad Hussein",
-    "username": "ahmad377",
-    "email": "ahmadhussein377@gmail.com",
-    "password": "ahmad123"
+    "name": "Samir Hussein",
+    "username": "samir377",
+    "email": "samirhussein377@gmail.com",
+    "password": "samir123"
 }
 
 // Login

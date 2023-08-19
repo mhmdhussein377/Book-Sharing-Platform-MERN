@@ -27,7 +27,7 @@ const Register = async(req, res) => {
 
         res
             .status(201)
-            .json({message: "user created successfully", user});
+            .json({message: "user created successfully"});
     } catch (error) {
         res
             .status(500)
@@ -40,12 +40,12 @@ const Login = async(req, res) => {
 
     try {
         const user = await User.findOne({email});
-        !user && res
+        if(!user) return res
             .status(401)
             .json("Wrong credentials");
 
         const validPassword = await bcrypt.compare(password, user.password);
-        !validPassword && res
+        if(!validPassword) return res
             .status(401)
             .json("Wrong credentials");
 

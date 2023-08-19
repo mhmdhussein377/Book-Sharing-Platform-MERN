@@ -22,27 +22,65 @@ const PostBook = async(req, res) => {
     }
 };
 
-const FollowingBooks = async (req, res) => {
-    const user = await User.findById(req.params.userId)
-    const following = user.following
+const FollowingBooks = async(req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        const following = user.following;
 
-    let users = await Promise.all(following.map(followingId => {
-        return User.findById(followingId)
-    }))
+        let users = await Promise.all(following.map((followingId) => {
+            return User.findById(followingId);
+        }));
 
-    let postsIds = []
-    
-    users.map(user => (
-        postsIds.push(...user.posts)
-    ))
+        let postsIds = [];
 
-    let posts = await Promise.all(postsIds.map(postId => {
-        return Book.findById(postId)
-    }))
+        users.map((user) => postsIds.push(...user.posts));
 
-    res.status(200).json(posts)
+        let posts = await Promise.all(postsIds.map((postId) => {
+            return Book.findById(postId);
+        }));
+
+        res
+            .status(200)
+            .json(posts);
+    } catch (error) {
+        res
+            .status(500)
+            .json(error)
+    }
+}
+
+const LikeBook = async(req, res) => {
+    try {
+        const post = await Book.findById(req.params.id)
+
+        if (!post.likes.includes(req.body.userId)) {
+            await post.updateOne({
+                $push: {
+                    likes: req.body.userId
+                }
+            })
+            res
+                .status(200)
+                .json("You just liked the post")
+        } else {
+            await post.updateOne({
+                $pull: {
+                    likes: req.body.userId
+                }
+            });
+            res
+                .status(200)
+                .json("You just disliked the post");
+        }
+    } catch (error) {
+        res
+            .status(500)
+            .json(error)
+    }
 }
 
 module.exports = {
-    PostBook, FollowingBooks
+    PostBook,
+    FollowingBooks,
+    LikeBook
 }

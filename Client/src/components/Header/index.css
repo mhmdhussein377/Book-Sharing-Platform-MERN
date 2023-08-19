@@ -51,7 +51,7 @@
     border: none !important;
 }
 
-.header .container .suggest-book button {
+.suggest-book button {
     padding: 12px 28px;
     border: 1px solid var(--secondary-color);
     background-color: transparent;

@@ -1,0 +1,92 @@
+.home .container {
+    padding: 100px 0;
+}
+
+.home .title {
+    margin-bottom: 2.5rem;
+}
+
+.home .title h1 {
+    margin-bottom: .3125rem;
+    margin-top: 0;
+    font-size: 1.625rem;
+    color: #063027;
+}
+
+.home .title .line {
+    height: 3px;
+    width: 80px;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+
+
+
+
+
+.home .container .bottom {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.375rem;
+}
+
+
+.home .container .bottom h2 {
+    margin-bottom: 0;
+    font-size: 2rem;
+}
+
+.home .container .bottom p {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: .625rem;
+}
+
+.home .container .bottom .suggest-book button {
+    background-color: var(--main-color);
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    font-weight: semibold;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+/* FOOTER */
+
+.home .footer {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #ccc;
+}
+
+.home .footer h5 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.home .footer p {
+    display: flex;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.home .footer p span {
+    font-weight: bold;
+    font-size: 1rem;
+}

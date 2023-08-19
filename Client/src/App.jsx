@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './utils/Layout'
+import Home from './pages/Home/Home'
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
     <Fragment>
       <Routes>
         <Route path="/" element={<Layout/>}>
-          <Route index element={<h1>Home</h1>}/>
+          <Route index element={<Home/>}/>
         </Route>
       </Routes>
     </Fragment>

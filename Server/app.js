@@ -10,6 +10,7 @@ const Book = require("./Models/Book")
 // Routes
 const AuthRoutes = require("./Routes/AuthRoutes")
 const BookRoutes = require("./Routes/BookRoutes")
+const UserRoutes = require("./Routes/UserRoutes")
 
 const app = express()
 app.use(express.json())
@@ -43,6 +44,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 
 app.use("/api", AuthRoutes)
 app.use("/api/books", BookRoutes)
+app.use("/api/users", UserRoutes)
 
 app.listen(process.env.PORT, () => {
     console.log("Server running")

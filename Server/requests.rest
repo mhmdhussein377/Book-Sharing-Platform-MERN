@@ -3,10 +3,10 @@ POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {
-    "name": "Mohammad Hussein",
-    "username": "mhmd377",
-    "email": "mhmdhussein377@gmail.com",
-    "password": "mhmd123"
+    "name": "Ahmad Hussein",
+    "username": "ahmad377",
+    "email": "ahmadhussein377@gmail.com",
+    "password": "ahmad123"
 }
 
 // Login
@@ -30,4 +30,13 @@ Content-Type: application/json
     "picture": "pic1.jpg",
     "review": "nice",
     "user": "64e09d381d3bacbdd96525e8"
+}
+
+// Follow a user
+###
+PUT http://localhost:5000/api/users/64e0c3bcb1561babe956c7b5/follow
+Content-Type: application/json
+
+{
+    "userId": "64e09d381d3bacbdd96525e8"
 }

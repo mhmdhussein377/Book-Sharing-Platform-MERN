@@ -1,5 +1,5 @@
 const Book = require("../Models/Book")
-const User = require("../Models/User")
+const User = require("../Models/User");
 
 const PostBook = async(req, res) => {
     const user = await User.findById(req.body.user)
@@ -92,9 +92,34 @@ const BookLikes = async(req, res) => {
     }
 }
 
+const SearchBooks = async(req, res) => {
+    try {
+        const searchTerm = req.params.searchTerm
+        let books = await Book.find({
+            $or: [
+                {
+                    author: { $regex: searchTerm, $options: 'i'}
+                },
+                {
+                    review: { $regex: searchTerm, $options: 'i'}
+                },
+                {
+                    genres: {
+                        $in: [searchTerm]
+                    }
+                }
+            ]
+        })
+        res.status(200).json(books)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 module.exports = {
     PostBook,
     FollowingBooks,
     LikeBook,
-    BookLikes
+    BookLikes,
+    SearchBooks
 }

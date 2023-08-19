@@ -25,10 +25,9 @@ POST http://localhost:5000/api/books
 Content-Type: application/json
 
 {
-    "title": "Book Two",
+    "title": "Book Three",
     "author": "John",
     "picture": "pic1.jpg",
-    "review": "nice",
     "user": "64e09d381d3bacbdd96525e8"
 }
 
@@ -62,3 +61,7 @@ Content-Type: application/json
 {
     "userId": "64e09d381d3bacbdd96525e8"
 }
+
+// Search for books 
+###
+GET http://localhost:5000/api/books/search/john

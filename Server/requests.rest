@@ -25,7 +25,7 @@ POST http://localhost:5000/api/books
 Content-Type: application/json
 
 {
-    "title": "Book One",
+    "title": "Book Two",
     "author": "John",
     "picture": "pic1.jpg",
     "review": "nice",
@@ -34,11 +34,11 @@ Content-Type: application/json
 
 // Follow a user
 ###
-PUT http://localhost:5000/api/users/64e0c3bcb1561babe956c7b5/follow
+PUT http://localhost:5000/api/users/64e09d381d3bacbdd96525e8/follow
 Content-Type: application/json
 
 {
-    "userId": "64e09d381d3bacbdd96525e8"
+    "userId": "64e0c3bcb1561babe956c7b5"
 }
 
 // Unfollow a user
@@ -49,3 +49,7 @@ Content-Type: application/json
 {
     "userId": "64e09d381d3bacbdd96525e8"
 }
+
+// Following Books
+###
+GET http://localhost:5000/api/books/64e0c3bcb1561babe956c7b5

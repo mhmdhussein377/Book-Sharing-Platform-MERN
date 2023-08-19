@@ -1,3 +1,8 @@
+:root {
+  --main-color: #30c5a6;
+  --white-color: #fff;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -308,4 +313,11 @@ form .input.text label {
 
 .field_with_errors .error {
   padding-left: 10px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  background-color: red;
 }

@@ -1,11 +1,17 @@
 import { Fragment } from 'react'
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Layout from './utils/Layout'
 
 function App() {
 
   return (
     <Fragment>
-      <h1>Hello World</h1>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<h1>Home</h1>}/>
+        </Route>
+      </Routes>
     </Fragment>
   )
 }

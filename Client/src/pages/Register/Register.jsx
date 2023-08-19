@@ -21,7 +21,7 @@ const Register = () => {
 
         try {
             console.log(inputs)
-            let {data} = await axios.post("http://localhost:5000/api/register", inputs)
+            await axios.post("http://localhost:5000/api/register", inputs)
             navigate("/login")
         } catch (error) {
             console.log(error)

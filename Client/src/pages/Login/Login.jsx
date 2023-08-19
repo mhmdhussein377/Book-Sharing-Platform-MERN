@@ -1,10 +1,13 @@
-import { useState } from "react";
+import {useState} from "react";
 import "./index.css"
-import { Link } from 'react-router-dom'
+import axios from "axios"
+import {Link, useNavigate} from 'react-router-dom'
 
 const Login = () => {
 
-    let [inputs, setInputs] = useState({})
+    let [inputs,
+        setInputs] = useState({})
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setInputs({
@@ -13,8 +16,17 @@ const Login = () => {
         })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+
+        try {
+            console.log(inputs)
+            let {data} = await axios.post("http://localhost:5000/api/login", inputs)
+            localStorage.setItem("token", data.token)
+            navigate("/")
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -28,13 +40,25 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="input">
                             <label htmlFor="email">Email</label>
-                            <input onChange={e => handleChange(e)} name="email" type="email" required id="email"/>
+                            <input
+                                onChange={e => handleChange(e)}
+                                name="email"
+                                type="email"
+                                required
+                                id="email"/>
                         </div>
                         <div className="input">
                             <label htmlFor="password">Password</label>
-                            <input onChange={e => handleChange(e)} name="password" type="password" required id="password"/>
+                            <input
+                                onChange={e => handleChange(e)}
+                                name="password"
+                                type="password"
+                                required
+                                id="password"/>
                         </div>
-                        <div className="to-register">Don't have an account? <Link to="/register">Register</Link></div>
+                        <div className="to-register">Don't have an account?
+                            <Link to="/register">Register</Link>
+                        </div>
                         <button type="submit">Login</button>
                     </form>
                 </div>

@@ -9,12 +9,12 @@ const Register = async(req, res) => {
 
     try {
         const usernameExists = await User.findOne({username});
-        usernameExists && res
+        if(usernameExists) return res
             .status(400)
             .json("Invalid username");
 
         const existingUser = await User.findOne({email});
-        existingUser && res
+        if(existingUser) return res
             .status(400)
             .json("User Already Exists! Login Instead");
 

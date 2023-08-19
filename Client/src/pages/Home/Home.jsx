@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Book from "../../components/Book/Book";
 import "./index.css"
 
@@ -22,12 +23,13 @@ const Home = () => {
                 <div className="bottom">
                     <h2>Do you have a recommendation?</h2>
                     <p>Do you know about some amazing book people should read?</p>
-                    <div className="suggest-book">
-                        <button>Suggest a book</button>
-                    </div>
+                    <Link to="/recommend">
+                        <div className="suggest-book">
+                            <button>Suggest a book</button>
+                        </div>
+                    </Link>
                 </div>
             </div>
-            
         </div>
     );
 }

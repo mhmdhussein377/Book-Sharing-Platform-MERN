@@ -4,11 +4,12 @@
 
 .recommend .container .form {
     width: 100%;
-    max-width: 500px;
+    max-width: 530px;
     margin: auto;
     display: flex;
     flex-direction: column;
     gap: 40px;
+    padding: 0 20px;
 }
 
 .recommend .title h1 {
@@ -49,6 +50,7 @@
 .recommend .container .form form .input input, .recommend .container .form form .input textarea {
     width: 100%;
     padding: 10px;
+    border: 1px solid #ccc;
 }
 
 .recommend .container .form form button {

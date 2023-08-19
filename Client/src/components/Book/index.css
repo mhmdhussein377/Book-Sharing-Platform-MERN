@@ -96,3 +96,7 @@
 .book .likes-section .likes span {
     font-weight: 700;
 }
+
+.book .likes-section .like {
+    cursor: pointer;
+}

@@ -1,0 +1,66 @@
+.header {
+    height: 80px;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.header .container .logo {
+    font-size: 1.25rem;
+    color: black;
+    font-weight: 700;
+}
+
+.header .container .searchBar {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.header .container .searchBar form {
+    display: flex;
+    align-items: center;
+    padding: 4px 5px;
+}
+
+.header .container .searchBar form input {
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.header .container .searchBar form button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: unset;
+}
+
+.header .container .searchBar form button {
+    border: none !important;
+}
+
+.header .container .suggest-book button {
+    padding: 12px 28px;
+    border: 1px solid var(--secondary-color);
+    background-color: transparent;
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: .875rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}

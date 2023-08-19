@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { FollowUser } = require("../Controllers/UserController");
+const { FollowUser, UnfollowUser } = require("../Controllers/UserController");
 
 router.put("/:id/follow", FollowUser);
+
+router.put("/:id/unfollow", UnfollowUser)
 
 module.exports = router

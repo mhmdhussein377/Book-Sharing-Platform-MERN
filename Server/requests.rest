@@ -40,3 +40,12 @@ Content-Type: application/json
 {
     "userId": "64e09d381d3bacbdd96525e8"
 }
+
+// Unfollow a user
+###
+PUT http://localhost:5000/api/users/64e0c3bcb1561babe956c7b5/unfollow
+Content-Type: application/json
+
+{
+    "userId": "64e09d381d3bacbdd96525e8"
+}

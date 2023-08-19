@@ -56,7 +56,7 @@ const Login = async(req, res) => {
         const {
             password: pass,
             ...others
-        } = user;
+        } = user._doc;
 
         return res
             .status(200)

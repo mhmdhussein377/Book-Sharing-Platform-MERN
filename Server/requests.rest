@@ -8,3 +8,26 @@ Content-Type: application/json
     "email": "mhmdhussein377@gmail.com",
     "password": "mhmd123"
 }
+
+// Login
+###
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "mhmdhussein377@gmail.com",
+    "password": "mhmd123"
+}
+
+// Create a post
+###
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+    "title": "Book One",
+    "author": "John",
+    "picture": "pic1.jpg",
+    "review": "nice",
+    "user": "64e09d381d3bacbdd96525e8"
+}

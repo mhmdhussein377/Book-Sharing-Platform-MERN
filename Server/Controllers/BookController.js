@@ -51,17 +51,17 @@ const FollowingBooks = async(req, res) => {
 
 const LikeBook = async(req, res) => {
     try {
-        const post = await Book.findById(req.params.id)
+        const post = await Book.findById(req.params.bookId)
 
         if (!post.likes.includes(req.body.userId)) {
             await post.updateOne({
                 $push: {
                     likes: req.body.userId
                 }
-            })
+            });
             res
                 .status(200)
-                .json("You just liked the post")
+                .json("You just liked the post");
         } else {
             await post.updateOne({
                 $pull: {
@@ -79,8 +79,22 @@ const LikeBook = async(req, res) => {
     }
 }
 
+const BookLikes = async(req, res) => {
+    try {
+        const post = await Book.findById(req.params.bookId)
+        res
+            .status(200)
+            .json(post.likes)
+    } catch (error) {
+        res
+            .status(500)
+            .json(error)
+    }
+}
+
 module.exports = {
     PostBook,
     FollowingBooks,
-    LikeBook
+    LikeBook,
+    BookLikes
 }

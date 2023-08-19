@@ -53,3 +53,12 @@ Content-Type: application/json
 // Following Books
 ###
 GET http://localhost:5000/api/books/64e0c3bcb1561babe956c7b5
+
+// Like a book
+###
+PUT http://localhost:5000/api/books/64e0b33dd803462538b09797/like
+Content-Type: application/json
+
+{
+    "userId": "64e09d381d3bacbdd96525e8"
+}

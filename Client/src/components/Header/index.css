@@ -13,6 +13,7 @@
     font-size: 1.25rem;
     color: black;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .header .container .searchBar {

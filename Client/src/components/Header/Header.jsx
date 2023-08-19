@@ -1,5 +1,6 @@
 import {AiOutlineSearch} from "react-icons/ai"
 import "./index.css"
+import {Link} from "react-router-dom"
 
 const Header = () => {
 
@@ -10,7 +11,9 @@ const Header = () => {
     return (
         <div className="header">
             <div className="container">
-                <div className="logo">BookRev</div>
+                <Link to="/">
+                    <div className="logo">BookRev</div>
+                </Link>
                 <div className="searchBar">
                     <form onSubmit={handleSubmit}>
                         <input type="text" placeholder="Search books"/>
@@ -19,9 +22,11 @@ const Header = () => {
                         </button>
                     </form>
                 </div>
-                <div className="suggest-book">
-                    <button>Suggest a book</button>
-                </div>
+                <Link to="/recommend">
+                    <div className="suggest-book">
+                        <button>Suggest a book</button>
+                    </div>
+                </Link>
             </div>
         </div>
     );

@@ -15,10 +15,10 @@
     margin: auto;
 }
 
-
 .login .container .form h1 {
     font-size: 2rem;
     margin-bottom: .3125rem;
+    margin-top: 0;
 }
 
 .login .container .form .line {
@@ -45,10 +45,26 @@
     gap: 5px;
 }
 
+.login .container .form form .input label {
+    font-size: .9375rem;
+}
+
 .login .container .form form .input input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
+}
+
+.login .to-register {
+    display: flex;
+    gap: 1.25rem;
+    font-size: .9375rem;
+}
+
+.login .to-register a {
+    color: var(--main-color);
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .login .container .form form button {

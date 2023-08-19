@@ -21,11 +21,11 @@ const Book = () => {
                 </div>
             </div>
             <div className="user">
-                <div className="left">Recommended by: Mohammad Hussein</div>
-                <div className="follow"><AiOutlinePlusSquare size={30} /></div>
+                <div className="left">Recommended by: <span>Mohammad Hussein</span></div>
+                <div className="follow"><AiOutlinePlusSquare size={35} /></div>
             </div>
             <div className="likes-section">
-                <div className="likes">35 Likes</div>
+                <div className="likes"><span>25</span> Likes</div>
                 <div className="like"><FcLike size={25} /></div>
             </div>
         </div>

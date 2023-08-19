@@ -10,7 +10,14 @@ const Home = () => {
                     <div className="line"></div>
                 </div>
                 <div className="books">
-                    <Book />
+                    <Book/>
+                    <Book/>
+                    <Book/>
+                    <Book/>
+                    <Book/>
+                    <Book/>
+                    <Book/>
+                    <Book/>
                 </div>
                 <div className="bottom">
                     <h2>Do you have a recommendation?</h2>
@@ -20,10 +27,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <h5>BookRev</h5>
-                <p>Made by <span>Mohammad Hussein</span></p>
-            </div>
+            
         </div>
     );
 }

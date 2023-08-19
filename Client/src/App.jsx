@@ -3,7 +3,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Layout from './utils/Layout'
 import Home from './pages/Home/Home'
-import Recommend from './pages/BookPost/Recommend'
+import Recommend from './pages/Recommend/Recommend'
 
 function App() {
 

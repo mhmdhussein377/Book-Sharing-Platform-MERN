@@ -3,6 +3,7 @@ import Book from "../../components/Book/Book";
 import "./index.css"
 import { useEffect, useState } from "react";
 import axios from "axios"
+import { FcDatabase } from "react-icons/fc";
 
 const Home = () => {
 
@@ -16,6 +17,7 @@ const Home = () => {
                 }
             });
             setBooks(data)
+            console.log(data)
         }
         getBooks()
     }, [])  

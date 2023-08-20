@@ -38,7 +38,7 @@ const FollowingBooks = async(req, res) => {
         let posts = await Promise.all(postsIds.map((postId) => {
             return Book.findById(postId).populate({
                 path: 'user',
-                select: 'name _id'
+                select: 'name _id following'
             })
         }));
 

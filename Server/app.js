@@ -43,9 +43,6 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 app.use("/api", AuthRoutes)
-
-app.use(verify)
-
 app.use("/api/books", BookRoutes)
 app.use("/api/users", UserRoutes)
 

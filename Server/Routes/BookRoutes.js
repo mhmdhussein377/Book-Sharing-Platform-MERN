@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const { PostBook, FollowingBooks, LikeBook, BookLikes, SearchBooks } = require("./../Controllers/BookController")
+const verify  = require("./../verifyToken")
 
-router.post("/", PostBook)
+router.post("/", verify, PostBook)
 
 router.get("/:userId", FollowingBooks)
 

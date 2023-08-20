@@ -15,20 +15,20 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "email": "mhmdhussein377@gmail.com",
-    "password": "mhmd123"
+    "email": "mayahussein377@gmail.com",
+    "password": "maya123"
 }
 
 // Create a post
 ###
 POST http://localhost:5000/api/books
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTE0MjczN2M0MTJhYjYzMmJjZmJhOCIsImlhdCI6MTY5MjUyNDczOX0.p93rc_4uXG8AMX9LSjmmrbykdVoJ6YDyFZGn2oz3D6U
 
 {
     "title": "Book Three",
     "author": "John",
-    "picture": "pic1.jpg",
-    "user": "64e09d381d3bacbdd96525e8"
+    "picture": "pic1.jpg"
 }
 
 // Follow a user

@@ -20,7 +20,6 @@ const Register = () => {
         e.preventDefault()
 
         try {
-            console.log(inputs)
             await axios.post("http://localhost:5000/api/register", inputs)
             navigate("/login")
         } catch (error) {

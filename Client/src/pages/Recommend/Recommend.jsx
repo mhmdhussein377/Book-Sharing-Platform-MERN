@@ -84,8 +84,8 @@ const Recommend = () => {
                             <textarea
                                 onChange={e => setReview(e.target.value)}
                                 id="review"
-                                cols="30"
-                                rows="10"></textarea>
+                                cols="10"
+                                rows="6"></textarea>
                         </div>
                         <input
                             onChange={e => setFile(e.target.files[0])}

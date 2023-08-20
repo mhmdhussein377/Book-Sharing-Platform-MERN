@@ -12,8 +12,6 @@ const Header = () => {
     const location = useLocation()
     const currentPathname = location.pathname
 
-    console.log(currentPathname)
-
     return (
         <div className="header">
             <div className="container">

@@ -3,10 +3,10 @@ POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {
-    "name": "Samir Hussein",
-    "username": "samir377",
-    "email": "samirhussein377@gmail.com",
-    "password": "samir123"
+    "name": "Ahmad Hussein",
+    "username": "ahmad377",
+    "email": "ahmadhussein377@gmail.com",
+    "password": "ahmad123"
 }
 
 // Login
@@ -15,43 +15,38 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "email": "mayahussein377@gmail.com",
-    "password": "maya123"
+    "email": "ahmadhussein377@gmail.com",
+    "password": "ahmad123"
 }
 
 // Create a post
 ###
 POST http://localhost:5000/api/books
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTE0MjczN2M0MTJhYjYzMmJjZmJhOCIsImlhdCI6MTY5MjUyNDczOX0.p93rc_4uXG8AMX9LSjmmrbykdVoJ6YDyFZGn2oz3D6U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDI3N2FlMGQzMWY0ZTY4NWNiYiIsImlhdCI6MTY5MjUyODE1OX0.Dwiw9fDkSDWKp1PmSo_zUQX7WT1PN8VrZiXFDGvFL9Q
 
 {
-    "title": "Book Three",
-    "author": "John",
+    "title": "Book Two",
+    "author": "Michael",
     "picture": "pic1.jpg"
 }
 
 // Follow a user
 ###
-PUT http://localhost:5000/api/users/64e09d381d3bacbdd96525e8/follow
+PUT http://localhost:5000/api/users/64e1ed277ae0d31f4e685cbb/follow
 Content-Type: application/json
-
-{
-    "userId": "64e0c3bcb1561babe956c7b5"
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjUyODA5OX0.ALFk6HcRIljpyKjkTi0Y_pKYkBygcST73GjdlGlC3CU
 
 // Unfollow a user
 ###
-PUT http://localhost:5000/api/users/64e0c3bcb1561babe956c7b5/unfollow
+PUT http://localhost:5000/api/users/64e1ed277ae0d31f4e685cbb/unfollow
 Content-Type: application/json
-
-{
-    "userId": "64e09d381d3bacbdd96525e8"
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjUyODA5OX0.ALFk6HcRIljpyKjkTi0Y_pKYkBygcST73GjdlGlC3CU
 
 // Following Books
 ###
-GET http://localhost:5000/api/books/64e0c3bcb1561babe956c7b5
+GET http://localhost:5000/api/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjUyODIzMH0.MxggLneDbQ28RAIsFpSG2SiMB46Gl3xsv_95qwyT3zo
 
 // Like a book
 ###

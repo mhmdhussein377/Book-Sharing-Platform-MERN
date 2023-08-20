@@ -5,7 +5,7 @@ const dotenv = require("dotenv")
 const multer = require('multer');
 const path = require('path');
 
-const Book = require("./Models/Book")
+const verify = require("./verifyToken")
 
 // Routes
 const AuthRoutes = require("./Routes/AuthRoutes")
@@ -43,6 +43,9 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 app.use("/api", AuthRoutes)
+
+app.use(verify)
+
 app.use("/api/books", BookRoutes)
 app.use("/api/users", UserRoutes)
 

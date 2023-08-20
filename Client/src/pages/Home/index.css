@@ -64,3 +64,10 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+
+@media (max-width: 1190px) {
+    
+    .home .books {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

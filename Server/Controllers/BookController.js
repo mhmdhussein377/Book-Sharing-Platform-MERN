@@ -24,7 +24,7 @@ const PostBook = async(req, res) => {
 
 const FollowingBooks = async(req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.user.id);
         const following = user.following;
 
         let users = await Promise.all(following.map((followingId) => {
@@ -36,7 +36,10 @@ const FollowingBooks = async(req, res) => {
         users.map((user) => postsIds.push(...user.posts));
 
         let posts = await Promise.all(postsIds.map((postId) => {
-            return Book.findById(postId);
+            return Book.findById(postId).populate({
+                path: 'user',
+                select: 'name _id'
+            })
         }));
 
         res
@@ -53,10 +56,10 @@ const LikeBook = async(req, res) => {
     try {
         const post = await Book.findById(req.params.bookId)
 
-        if (!post.likes.includes(req.body.userId)) {
+        if (!post.likes.includes(req.user.id)) {
             await post.updateOne({
                 $push: {
-                    likes: req.body.userId
+                    likes: req.user.id
                 }
             });
             res
@@ -65,7 +68,7 @@ const LikeBook = async(req, res) => {
         } else {
             await post.updateOne({
                 $pull: {
-                    likes: req.body.userId
+                    likes: req.user.id
                 }
             });
             res

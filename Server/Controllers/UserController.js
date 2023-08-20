@@ -1,8 +1,8 @@
 const User = require("../Models/User")
 
 const FollowUser = async(req, res) => {
-    if (req.body.userId !== req.params.id) {
-        const currentUser = await User.findById(req.body.userId)
+    if (req.user.id !== req.params.id) {
+        const currentUser = await User.findById(req.user.id)
 
         if (!currentUser.following.includes(req.params.id)) {
             await currentUser.updateOne({
@@ -26,8 +26,8 @@ const FollowUser = async(req, res) => {
 }
 
 const UnfollowUser = async(req, res) => {
-    if (req.body.userId !== req.params.id) {
-        const currentUser = await User.findById(req.body.userId)
+    if (req.user.id !== req.params.id) {
+        const currentUser = await User.findById(req.user.id)
 
         if (currentUser.following.includes(req.params.id)) {
             await currentUser.updateOne({

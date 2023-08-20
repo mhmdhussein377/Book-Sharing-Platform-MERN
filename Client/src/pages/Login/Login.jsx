@@ -20,7 +20,6 @@ const Login = () => {
         e.preventDefault()
 
         try {
-            console.log(inputs)
             let {data} = await axios.post("http://localhost:5000/api/login", inputs)
             localStorage.setItem("token", data.token)
             navigate("/")

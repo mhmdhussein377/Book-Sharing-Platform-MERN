@@ -51,6 +51,7 @@
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
+    font-size: 1rem;
 }
 
 .recommend .container .form form button, .photo-upload {
@@ -66,6 +67,7 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     text-align: center;
+    cursor: pointer;
 }
 
 .recommend .container .form form button:first-of-type {

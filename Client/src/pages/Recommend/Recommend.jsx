@@ -55,7 +55,7 @@ const Recommend = () => {
             console.log(error)
         }
 
-        navigate("/")
+        navigate("/home")
     }
 
     return (

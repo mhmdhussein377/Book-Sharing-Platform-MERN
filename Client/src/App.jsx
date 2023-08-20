@@ -12,11 +12,11 @@ function App() {
   return (
     <Fragment>
       <Routes>
-        <Route path='/login' element={<Login />}/>
+        <Route path='/' element={<Login />}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path="/" element={<Layout/>}>
+        <Route path="/home" element={<Layout/>}>
           <Route index element={<Home/>}/>
-          <Route path='/recommend' element={<Recommend />}/>
+          <Route path='/home/recommend' element={<Recommend />}/>
         </Route>
       </Routes>
     </Fragment>

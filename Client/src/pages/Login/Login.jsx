@@ -22,7 +22,7 @@ const Login = () => {
         try {
             let {data} = await axios.post("http://localhost:5000/api/login", inputs)
             localStorage.setItem("token", data.token)
-            navigate("/")
+            navigate("/home")
         } catch (error) {
             console.log(error)
         }

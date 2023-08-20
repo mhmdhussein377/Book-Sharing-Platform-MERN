@@ -1,6 +1,7 @@
 import "./index.css"
 import {AiOutlinePlusSquare} from "react-icons/ai"
 import {FcLike, FcLikePlaceholder} from "react-icons/fc";
+import {PiMinusSquare} from 'react-icons/pi'
 import {useEffect, useState} from "react"
 import axios from "axios"
 
@@ -18,8 +19,10 @@ const Book = ({
         setIsLiked] = useState(false)
     let [userId,
         setUserId] = useState(null);
-    let [likesCount, setLikesCount] = useState(likes.length)
-    let [isUserFollowed, setIsUserFollowed] = useState(false)
+    let [likesCount,
+        setLikesCount] = useState(likes.length)
+    let [isUserFollowed,
+        setIsUserFollowed] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -27,7 +30,6 @@ const Book = ({
             const tokenPayload = token.split(".")[1];
             const decodedPayload = JSON.parse(atob(tokenPayload));
             setUserId(decodedPayload.id);
-
         } catch (error) {
             console.error("Error decoding token:", error);
         }
@@ -35,19 +37,44 @@ const Book = ({
 
     useEffect(() => {
         setIsLiked(likes.includes(userId))
+        setIsUserFollowed(user.following.includes(userId))
     }, [likes, userId])
 
     const handleLike = async() => {
-        
-        isLiked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1)
+
+        isLiked
+            ? setLikesCount(likesCount - 1)
+            : setLikesCount(likesCount + 1)
         setIsLiked(!isLiked)
-        
+
         try {
             await axios.put(`http://localhost:5000/api/books/${_id}/like`, {}, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
                 }
             })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleFollow = async() => {
+        setIsUserFollowed(!isUserFollowed)
+
+        try {
+            if (isUserFollowed) {
+                await axios.put(`http://localhost:5000/api/users/${user._id}/unfollow`, {}, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+            } else {
+                await axios.put(`http://localhost:5000/api/users/${user._id}/follow`, {}, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+            }
         } catch (error) {
             console.log(error)
         }
@@ -74,13 +101,16 @@ const Book = ({
                     Recommended by:
                     <span>{user.name}</span>
                 </div>
-                <div className="follow">
-                    <AiOutlinePlusSquare size={35}/>
+                <div onClick={handleFollow} className="follow">
+                    {isUserFollowed
+                        ? <PiMinusSquare size={35}/>
+                        : <AiOutlinePlusSquare size={35}/>}
                 </div>
             </div>
             <div className="likes-section">
                 <div className="likes">
-                    <span>{likesCount}</span> Likes
+                    <span>{likesCount}</span>
+                    Likes
                 </div>
                 <div onClick={handleLike} className="like">
                     {isLiked

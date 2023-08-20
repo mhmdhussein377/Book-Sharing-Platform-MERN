@@ -15,10 +15,10 @@ const Header = () => {
     return (
         <div className="header">
             <div className="container">
-                <Link to="/">
+                <Link to="/home">
                     <div className="logo">BookRev</div>
                 </Link>
-                {currentPathname !== "/recommend" && <div className="searchBar">
+                {currentPathname !== "/home/recommend" && <div className="searchBar">
                     <form onSubmit={handleSubmit}>
                         <input type="text" placeholder="Search books"/>
                         <button type="submit">
@@ -26,7 +26,7 @@ const Header = () => {
                         </button>
                     </form>
                 </div>}
-                <Link to="/recommend">
+                <Link to="/home/recommend">
                     <div className="suggest-book">
                         <button>Suggest a book</button>
                     </div>

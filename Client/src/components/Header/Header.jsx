@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom"
 import {useLocation} from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 
-const Header = ({setUser}) => {
+const Header = ({setUser, setSearchTerm, searchTerm, setSearchedBooks}) => {
 
     const navigate = useNavigate()
 
@@ -26,18 +26,25 @@ const Header = ({setUser}) => {
                 <Link to="/home">
                     <div className="logo">BookRev</div>
                 </Link>
-                {currentPathname === "/home/browse" && <SearchBar/>}
+                {currentPathname === "/home/browse" && <SearchBar setSearchedBooks={setSearchedBooks} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}
                 <div className="right-header">
+                    <Link to="/home/browse">
+                        <div className="all-books">
+                            <button>All books</button>
+                        </div>
+                    </Link>
                     <Link to="/home/recommend">
                         <div className="suggest-book">
                             <button>Suggest a book</button>
                         </div>
                     </Link>
-                    <div onClick={handleLogout} className="logout">Logout</div>
+                    <div onClick={handleLogout} className="logout">
+                        Logout
+                    </div>
                 </div>
             </div>
             <div className="search-sm hide">
-                <SearchBar/>
+                {currentPathname === "/home/browse" && <SearchBar setSearchedBooks={setSearchedBooks} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}
             </div>
         </div>
     );

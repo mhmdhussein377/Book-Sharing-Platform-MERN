@@ -23,7 +23,7 @@
 }
 
 
-.suggest-book button, .header .container .logout {
+.suggest-book button, .all-books button, .header .container .logout {
     padding: 12px 28px;
     border: 1px solid var(--secondary-color);
     background-color: transparent;
@@ -60,7 +60,7 @@
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 950px) {
     
     .header .container .searchBar {
         display: none;
@@ -71,7 +71,7 @@
         margin-bottom: 60px;
     }
 
-    .suggest-book button {
+    .suggest-book button, .all-books button {
         padding: 10px;
     }
 

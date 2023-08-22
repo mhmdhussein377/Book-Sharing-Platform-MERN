@@ -54,6 +54,24 @@
     font-size: 1rem;
 }
 
+.recommend .container .form form .genres-input {
+    display: flex;
+    flex-direction: column;
+    gap: .3125rem;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.recommend .container .form form .genres-input form {
+    background-color: red;
+    display: flex;
+    height: fit-content;
+}
+
+.recommend .container .form form .genres-input form input {
+    background-color: aqua;
+}
+
 .recommend .container .form form button, .photo-upload {
     padding: 10px;
     border: none;
@@ -85,4 +103,11 @@
 .recommend .container .form form button[type = "submit"] {
     margin-top: 20px;
     padding: 12px;
+}
+
+@media (max-width: 700px) {
+    
+    .recommend .title h1 {
+        margin-top: 60px !important;
+    }
 }

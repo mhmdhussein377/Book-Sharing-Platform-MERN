@@ -12,7 +12,8 @@ const Book = ({
     user,
     review,
     likes,
-    _id
+    _id,
+    setUser
 }) => {
 
     let [isLiked,
@@ -37,8 +38,15 @@ const Book = ({
 
     useEffect(() => {
         setIsLiked(likes.includes(userId))
-        setIsUserFollowed(user.following.includes(userId))
-    }, [likes, userId, user.following])
+        let userFollowing = JSON
+            .parse(localStorage.getItem("user"))
+            .following
+        console.log(userFollowing)
+        console.log(userFollowing.includes(user._id));
+        setIsUserFollowed(userFollowing.includes(user._id))
+        // setIsUserFollowed(user.following.includes(userId))
+
+    }, [likes, user.following])
 
     const handleLike = async() => {
 
@@ -68,12 +76,22 @@ const Book = ({
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 });
+                setUser(prev => ({
+                    ...prev,
+                    following: prev.following.filter(friend => friend !== user._id)
+                }))
             } else {
                 await axios.put(`http://localhost:5000/api/users/${user._id}/follow`, {}, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 });
+                setUser((prev) => ({
+                    ...prev,
+                    following: [
+                        user._id, ...prev.following
+                    ]
+                }));
             }
         } catch (error) {
             console.log(error)

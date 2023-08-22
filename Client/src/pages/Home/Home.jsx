@@ -4,13 +4,13 @@ import "./index.css"
 import { useEffect, useState } from "react";
 import axios from "axios"
 
-const Home = () => {
+const Home = ({setUser, user}) => {
 
     let [books, setBooks] = useState([])
 
     useEffect(() => {
         const getBooks = async() => {
-            let { data } = await axios.get("http://localhost:5000/api/books", {
+            let { data } = await axios.get("http://localhost:5000/api/books/following-books", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -19,7 +19,7 @@ const Home = () => {
             setBooks(sortedBooks.reverse())
         }
         getBooks()
-    }, [])  
+    }, [user])  
 
     return (
         <div className="home">
@@ -30,7 +30,7 @@ const Home = () => {
                 </div>
                 <div className="books">
                     {books.length > 0 ? books.map((book,index) => (
-                        <Book key={index} {...book} />
+                        <Book setUser={setUser} key={index} {...book} />
                     )) : <h1>No Recommendations</h1>}
                 </div>
                 <div className="bottom">

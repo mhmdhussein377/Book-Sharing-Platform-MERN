@@ -50,7 +50,20 @@ const UnfollowUser = async(req, res) => {
     }
 }
 
+const getUser = async(req, res) => {
+
+    try {
+        const userId = req.params.userId;
+        let user = User.find({ _id: userId });
+        return res.status(200).json(user)
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+
+}
+
 module.exports = {
     FollowUser,
-    UnfollowUser
+    UnfollowUser,
+    getUser
 }

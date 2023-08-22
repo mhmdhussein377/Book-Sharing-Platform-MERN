@@ -1,11 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const { PostBook, FollowingBooks, LikeBook, BookLikes, SearchBooks } = require("./../Controllers/BookController")
+const { PostBook, FollowingBooks, LikeBook, BookLikes, SearchBooks, getAllBooks } = require("./../Controllers/BookController")
 const verify = require("./../verifyToken")
 
 router.post("/", verify, PostBook)
 
-router.get("/", verify, FollowingBooks)
+router.get("/following-books", verify, FollowingBooks)
+
+router.get("/", verify, getAllBooks)
 
 router.put("/:bookId/like", verify, LikeBook)
 

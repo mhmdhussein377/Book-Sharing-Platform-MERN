@@ -38,7 +38,7 @@ const Book = ({
     useEffect(() => {
         setIsLiked(likes.includes(userId))
         setIsUserFollowed(user.following.includes(userId))
-    }, [likes, userId])
+    }, [likes, userId, user.following])
 
     const handleLike = async() => {
 

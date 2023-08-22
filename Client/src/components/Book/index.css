@@ -21,6 +21,8 @@
 
 .book .book-details .img img {
     height: 15.625rem;
+    width: 170px;
+    object-fit: cover;
 }
 
 .book .book-details .content {
@@ -40,6 +42,7 @@
 
 .book .book-details .content .genres {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 20px;
 }
@@ -67,7 +70,18 @@
     font-size: .875rem;
     display: flex;
     align-items: center;
-    gap: .625rem
+    gap: .625rem;
+    text-align: left;
+}
+
+@media (max-width: 500px) {
+    
+    .book .user .left {
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        text-align: left;
+    }
 }
 
 .book .user .left span {

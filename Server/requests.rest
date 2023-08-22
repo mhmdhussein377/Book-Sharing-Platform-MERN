@@ -60,3 +60,9 @@ Content-Type: application/json
 // Search for books 
 ###
 GET http://localhost:5000/api/books/search/john
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjczMTY0NX0.JDjz5npSBEGsmeTW9epJttQPVsZdNa4_Y6bMt78B4vo
+
+// get all books
+###
+GET http://localhost:5000/api/books
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjczMTY0NX0.JDjz5npSBEGsmeTW9epJttQPVsZdNa4_Y6bMt78B4vo

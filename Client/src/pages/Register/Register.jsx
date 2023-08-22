@@ -7,6 +7,10 @@ const Register = () => {
 
     let [inputs,
         setInputs] = useState({})
+    let [usernameError,
+        setUsernameError] = useState("")
+    let [emailError,
+        setEmailError] = useState("")
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -19,11 +23,22 @@ const Register = () => {
     const handleSubmit = async(e) => {
         e.preventDefault()
 
+        function timeOut(error, setError) {
+            setError(error.response.data);
+            setTimeout(() => {
+                setError("");
+            }, 3000);
+        }
+
         try {
             await axios.post("http://localhost:5000/api/register", inputs)
-            navigate("/login")
+            navigate("/")
         } catch (error) {
-            console.log(error)
+            if (error.response.data === "Invalid username") {
+                timeOut(error, setUsernameError)
+            } else {
+                timeOut(error, setEmailError)
+            }
         }
     }
 
@@ -52,7 +67,8 @@ const Register = () => {
                                 name="username"
                                 type="text"
                                 required
-                                id="username"/>
+                                id="username"/> 
+                            {usernameError && <p className="error">{usernameError}</p>}
                         </div>
                         <div className="input">
                             <label htmlFor="email">Email</label>
@@ -61,7 +77,8 @@ const Register = () => {
                                 name="email"
                                 type="email"
                                 required
-                                id="email"/>
+                                id="email"/> 
+                            {emailError && <p className="error">{emailError}</p>}
                         </div>
                         <div className="input">
                             <label htmlFor="password">Password</label>
@@ -70,11 +87,12 @@ const Register = () => {
                                 name="password"
                                 type="password"
                                 required
+                                minLength={6}
                                 id="password"/>
                         </div>
                         <div className="to-login">
                             Already have an account?
-                            <Link to="/login">Login</Link>
+                            <Link to="/">Login</Link>
                         </div>
                         <button type="submit">Register</button>
                     </form>

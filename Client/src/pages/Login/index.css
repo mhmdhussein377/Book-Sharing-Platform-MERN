@@ -55,6 +55,12 @@
     border: 1px solid #ccc;
 }
 
+.login .error {
+    color: red;
+    margin: 0;
+    font-size: .875rem;
+}
+
 .login .to-register {
     display: flex;
     gap: 1.25rem;

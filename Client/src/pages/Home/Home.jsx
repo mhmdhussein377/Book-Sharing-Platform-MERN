@@ -3,7 +3,6 @@ import Book from "../../components/Book/Book";
 import "./index.css"
 import { useEffect, useState } from "react";
 import axios from "axios"
-import { FcDatabase } from "react-icons/fc";
 
 const Home = () => {
 
@@ -16,8 +15,8 @@ const Home = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            setBooks(data)
-            console.log(data)
+            const sortedBooks = data.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            setBooks(sortedBooks.reverse())
         }
         getBooks()
     }, [])  
@@ -30,9 +29,9 @@ const Home = () => {
                     <div className="line"></div>
                 </div>
                 <div className="books">
-                    {books.map((book,index) => (
+                    {books.length > 0 ? books.map((book,index) => (
                         <Book key={index} {...book} />
-                    ))}
+                    )) : <h1>No Recommendations</h1>}
                 </div>
                 <div className="bottom">
                     <h2>Do you have a recommendation?</h2>

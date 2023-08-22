@@ -13,11 +13,20 @@ const Recommend = () => {
         setReview] = useState("")
     let [file,
         setFile] = useState(null)
+    let [photoError, setPhotoError] = useState(false)
     const photoRef = useRef()
     const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+
+        if(!file) {
+            setPhotoError(true)
+            setTimeout(() => {
+                setPhotoError(false)
+            }, 3000)
+            return
+        }
 
         let newPost = {
             title,
@@ -38,7 +47,7 @@ const Recommend = () => {
         try {
             await axios.post("http://localhost:5000/api/upload", data, {
                 headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTE0MjczN2M0MTJhYjYzMmJjZmJhOCIsImlhdCI6MTY5MjUyNjIxNH0.XJ_S-QLj5eWjh_18jVqg10NG8I7HvUCPj3PlFETaGUI`
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
         } catch (error) {
@@ -48,7 +57,7 @@ const Recommend = () => {
         try {
             await axios.post("http://localhost:5000/api/books", newPost, {
                 headers: {
-                    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTE0MjczN2M0MTJhYjYzMmJjZmJhOCIsImlhdCI6MTY5MjUyNjIxNH0.XJ_S-QLj5eWjh_18jVqg10NG8I7HvUCPj3PlFETaGUI`
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
         } catch (error) {
@@ -83,6 +92,7 @@ const Recommend = () => {
                             <label htmlFor="review">Your review</label>
                             <textarea
                                 onChange={e => setReview(e.target.value)}
+                                required
                                 id="review"
                                 cols="10"
                                 rows="6"></textarea>
@@ -99,6 +109,7 @@ const Recommend = () => {
                             onClick={e => photoRef
                             .current
                             .click()}>Add a photo</div>
+                        {photoError && <p className="photo-error">A photo is required</p>}
                         <button type="submit">Submit the form</button>
                     </form>
                 </div>

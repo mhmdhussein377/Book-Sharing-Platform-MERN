@@ -3,10 +3,11 @@ import "./index.css"
 import axios from "axios"
 import {Link, useNavigate} from 'react-router-dom'
 
-const Login = () => {
+const Login = ({setUser}) => {
 
     let [inputs,
         setInputs] = useState({})
+    let [error, setError] = useState("")
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -22,9 +23,13 @@ const Login = () => {
         try {
             let {data} = await axios.post("http://localhost:5000/api/login", inputs)
             localStorage.setItem("token", data.token)
+            setUser(data)
             navigate("/home")
         } catch (error) {
-            console.log(error)
+            setError(error.response.data)
+            setTimeout(() => {
+                setError("")
+            }, 3000)
         }
     }
 
@@ -54,6 +59,7 @@ const Login = () => {
                                 type="password"
                                 required
                                 id="password"/>
+                            {error && <p className="error">{error}</p>}
                         </div>
                         <div className="to-register">Don't have an account?
                             <Link to="/register">Register</Link>

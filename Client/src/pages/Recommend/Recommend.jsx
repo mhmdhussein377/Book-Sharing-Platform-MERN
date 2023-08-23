@@ -3,7 +3,7 @@ import "./index.css"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
 import {AiOutlinePlus} from 'react-icons/ai'
-import {BiChevronDown} from "react-icons/bi"
+import {HiOutlineChevronUp, HiOutlineChevronDown} from "react-icons/hi";
 
 const Recommend = () => {
 
@@ -72,18 +72,17 @@ const Recommend = () => {
             return
         }
 
-
         let checkedGenres = genres.filter(item => {
-            if(item.checked) {
+            if (item.checked) {
                 return item.label
             }
         })
 
         console.log(checkedGenres)
 
-        let genresToSend = checkedGenres.map(item => {return item.label})
-
-        console.log(genresToSend)
+        let genresToSend = checkedGenres.map(item => {
+            return item.label
+        })
 
         let newPost = {
             title,
@@ -154,11 +153,12 @@ const Recommend = () => {
                         </div>
                         <div className="genres-input">
                             <div className="main-checkbox">
+                                <label htmlFor="genres">Genres</label>
                                 <div onClick={(e) => setIsListOpened(!isListOpened)} className="top">
                                     <span>Select genres</span>
-                                    <span>
-                                        <BiChevronDown size={25}/>
-                                    </span>
+                                    {isListOpened
+                                        ? <HiOutlineChevronUp size={25}/>
+                                        : <HiOutlineChevronDown size={25}/>}
                                 </div>
                                 <div className={`checkbox-list ${isListOpened && "open"}`}>
                                     {genres.map((genre) => (

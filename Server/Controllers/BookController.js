@@ -112,7 +112,8 @@ const SearchBooks = async(req, res) => {
                     }
                 }, {
                     genres: {
-                        $in: [searchTerm]
+                        $regex: searchTerm,
+                        $options: 'i'
                     }
                 }
             ]
@@ -130,7 +131,7 @@ const SearchBooks = async(req, res) => {
 const getAllBooks = async(req, res) => {
 
     try {
-        let books = await Book.find({}).populate("user", "_id name following");
+        let books = await Book.find({user: {$ne: req.user.id}}).populate("user", "_id name following");
         return res.status(200).json(books);
     } catch (error) {
         return res.status(500).json(error)

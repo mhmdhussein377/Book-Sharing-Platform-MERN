@@ -33,6 +33,7 @@ const BookSchema = new Schema({
     genres: [
         {
             type: String,
+            enum: ['Design', 'Personal Development', 'Communication', 'Finance', 'Productivity', 'Marketing', 'Biography'],
             index: true
         }
     ]

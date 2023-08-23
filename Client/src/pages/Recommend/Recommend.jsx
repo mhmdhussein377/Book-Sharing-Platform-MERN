@@ -1,8 +1,9 @@
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import "./index.css"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
 import {AiOutlinePlus} from 'react-icons/ai'
+import {BiChevronDown} from "react-icons/bi"
 
 const Recommend = () => {
 
@@ -16,8 +17,49 @@ const Recommend = () => {
         setFile] = useState(null)
     let [photoError,
         setPhotoError] = useState(false)
+    let [isListOpened,
+        setIsListOpened] = useState(false)
     const photoRef = useRef()
     const navigate = useNavigate()
+
+    const genresInitial = [
+        {
+            id: 1,
+            label: "Personal Development"
+        }, {
+            id: 2,
+            label: "Communication"
+        }, {
+            id: 4,
+            label: "Finance"
+        }, {
+            id: 5,
+            label: "Productivity"
+        }, {
+            id: 6,
+            label: "Design"
+        }, {
+            id: 7,
+            label: "Marketing"
+        }, {
+            id: 8,
+            label: "Biography"
+        }
+    ];
+
+    const [genres,
+        setGenres] = useState(genresInitial);
+
+    const handleCheckboxChange = (id) => {
+        const updatedItems = genres.map((item) => item.id === id
+            ? {
+                ...item,
+                checked: !item.checked
+            }
+            : item);
+        setGenres(updatedItems);
+        console.log(genres)
+    };
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -30,11 +72,27 @@ const Recommend = () => {
             return
         }
 
+
+        let checkedGenres = genres.filter(item => {
+            if(item.checked) {
+                return item.label
+            }
+        })
+
+        console.log(checkedGenres)
+
+        let genresToSend = checkedGenres.map(item => {return item.label})
+
+        console.log(genresToSend)
+
         let newPost = {
             title,
             author: authorName,
-            review
+            review,
+            genres: genresToSend
         }
+
+        console.log(newPost)
 
         let data;
 
@@ -95,17 +153,25 @@ const Recommend = () => {
                                 id="author-name"/>
                         </div>
                         <div className="genres-input">
-                            <label htmlFor="genres">Genres</label>
-                            <form className="">
-                                <input
-                                    required
-                                    onChange={(e) => setAuthorname(e.target.value)}
-                                    type="text"
-                                    id="genres"/>
-                                <span>
-                                    <AiOutlinePlus size={25}/>
-                                </span>
-                            </form>
+                            <div className="main-checkbox">
+                                <div onClick={(e) => setIsListOpened(!isListOpened)} className="top">
+                                    <span>Select genres</span>
+                                    <span>
+                                        <BiChevronDown size={25}/>
+                                    </span>
+                                </div>
+                                <div className={`checkbox-list ${isListOpened && "open"}`}>
+                                    {genres.map((genre) => (
+                                        <label key={genre.id} className="item">
+                                            <input
+                                                checked={genre.checked || false}
+                                                onChange={() => handleCheckboxChange(genre.id)}
+                                                type="checkbox"/>
+                                            <span>{genre.label}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                         <div className="input">
                             <label htmlFor="review">Your review</label>

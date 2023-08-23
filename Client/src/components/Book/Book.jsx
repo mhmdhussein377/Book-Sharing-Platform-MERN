@@ -12,6 +12,7 @@ const Book = ({
     user,
     review,
     likes,
+    genres,
     _id,
     setUser
 }) => {
@@ -98,6 +99,8 @@ const Book = ({
         }
     }
 
+    console.log(genres)
+
     return (
         <div className="book">
             <div className="book-details">
@@ -108,8 +111,9 @@ const Book = ({
                     <h3 className="title">{title}</h3>
                     <p className="author">{author}</p>
                     <div className="genres">
-                        <div className="genre">Design</div>
-                        <div className="genre">personal Development</div>
+                        {genres.map((genre, index) => (
+                            <div key={index} className="genre">{genre}</div>
+                        ))}
                     </div>
                     {review && <div className="review">{review}</div>}
                 </div>

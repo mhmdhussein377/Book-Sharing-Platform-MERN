@@ -3,7 +3,10 @@ const User = require("../Models/User");
 
 const PostBook = async(req, res) => {
     const user = await User.findById(req.user.id)
-    const newPost = new Book({...req.body, user: user._id});
+    const newPost = new Book({
+        ...req.body,
+        user: user._id
+    });
 
     try {
         const savedPost = await newPost.save();
@@ -36,10 +39,9 @@ const FollowingBooks = async(req, res) => {
         users.map((user) => postsIds.push(...user.posts));
 
         let posts = await Promise.all(postsIds.map((postId) => {
-            return Book.findById(postId).populate({
-                path: 'user',
-                select: 'name _id following'
-            })
+            return Book
+                .findById(postId)
+                .populate({path: 'user', select: 'name _id following'})
         }));
 
         res
@@ -131,10 +133,35 @@ const SearchBooks = async(req, res) => {
 const getAllBooks = async(req, res) => {
 
     try {
-        let books = await Book.find({user: {$ne: req.user.id}}).populate("user", "_id name following");
-        return res.status(200).json(books);
+        let books = await Book
+            .find({
+            user: {
+                $ne: req.user.id
+            }
+        })
+            .populate("user", "_id name following");
+        return res
+            .status(200)
+            .json(books);
     } catch (error) {
-        return res.status(500).json(error)
+        return res
+            .status(500)
+            .json(error)
+    }
+}
+
+const getUserBooks = async(req, res) => {
+
+    try {
+        let books = await Book
+            .find({user: req.user.id})
+        return res
+            .status(200)
+            .json(books);
+    } catch (error) {
+        return res
+            .status(500)
+            .json(error)
     }
 }
 
@@ -144,5 +171,6 @@ module.exports = {
     LikeBook,
     BookLikes,
     SearchBooks,
-    getAllBooks
+    getAllBooks,
+    getUserBooks
 }

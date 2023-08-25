@@ -3,6 +3,7 @@
     --main-color: #30c5a6;
     --secondary-color: #288471;
     --white-color: #fff;
+    --black-color: black;
 }
 
 * {
@@ -440,7 +441,7 @@ form .input.text label {
 }
 
 .container {
-    max-width: 1300px;
+    max-width: 1400px;
     margin: auto;
     padding: 0 20px;
 }

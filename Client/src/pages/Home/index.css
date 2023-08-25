@@ -53,7 +53,7 @@
 
 .home .container .bottom .suggest-book button {
     background-color: var(--main-color);
-    color: white;
+    color: var(--white-color);
     padding: 12px 24px;
     font-size: 1rem;
     font-weight: 600;

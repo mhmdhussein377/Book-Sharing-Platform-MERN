@@ -45,7 +45,6 @@ const Book = ({
         console.log(userFollowing)
         console.log(userFollowing.includes(user._id));
         setIsUserFollowed(userFollowing.includes(user._id))
-        // setIsUserFollowed(user.following.includes(userId))
 
     }, [likes, user.following])
 

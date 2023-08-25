@@ -66,3 +66,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN
 ###
 GET http://localhost:5000/api/books
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjczMTY0NX0.JDjz5npSBEGsmeTW9epJttQPVsZdNa4_Y6bMt78B4vo
+
+###
+GET http://localhost:5000/api/books/my-books
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTFlZDNjN2FlMGQzMWY0ZTY4NWNiZiIsImlhdCI6MTY5MjkwMjM3NH0.rr2xFqwqTa-wYfzK0apZ7TZ74AKIk__f6JxfAHlGlfo

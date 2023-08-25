@@ -11,7 +11,7 @@ const MyBooks = () => {
 
     useEffect(() => {
         const getBooks = async() => {
-            let {data} = await axios.get("http://localhost:5000/api/books/my-books", {
+            let {data} = await axios.get("/api/books/my-books", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

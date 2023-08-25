@@ -8,8 +8,11 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import Browse from './pages/Browse/Browse'
 import MyBooks from './pages/MyBooks/MyBooks'
+import axios from 'axios'
 
 function App() {
+
+    axios.defaults.baseURL = "http://localhost:5000";
 
     let [user,
         setUser] = useState(JSON.parse(localStorage.getItem("user")) || null)

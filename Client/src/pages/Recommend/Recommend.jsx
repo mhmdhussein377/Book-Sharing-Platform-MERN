@@ -104,7 +104,7 @@ const Recommend = () => {
         }
 
         try {
-            await axios.post("http://localhost:5000/api/upload", data, {
+            await axios.post("/api/upload", data, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -114,7 +114,7 @@ const Recommend = () => {
         }
 
         try {
-            await axios.post("http://localhost:5000/api/books", newPost, {
+            await axios.post("/api/books", newPost, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

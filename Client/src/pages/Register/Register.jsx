@@ -31,7 +31,7 @@ const Register = () => {
         }
 
         try {
-            await axios.post("http://localhost:5000/api/register", inputs)
+            await axios.post("/api/register", inputs);
             navigate("/")
         } catch (error) {
             if (error.response.data === "Invalid username") {
@@ -67,8 +67,7 @@ const Register = () => {
                                 name="username"
                                 type="text"
                                 required
-                                id="username"/> 
-                            {usernameError && <p className="error">{usernameError}</p>}
+                                id="username"/> {usernameError && <p className="error">{usernameError}</p>}
                         </div>
                         <div className="input">
                             <label htmlFor="email">Email</label>
@@ -77,8 +76,7 @@ const Register = () => {
                                 name="email"
                                 type="email"
                                 required
-                                id="email"/> 
-                            {emailError && <p className="error">{emailError}</p>}
+                                id="email"/> {emailError && <p className="error">{emailError}</p>}
                         </div>
                         <div className="input">
                             <label htmlFor="password">Password</label>

@@ -15,7 +15,7 @@ const Browse = ({searchedBooks, setUser, user}) => {
 
     useEffect(() => {
         const getBooks = async() => {
-            let {data} = await axios.get("http://localhost:5000/api/books", {
+            let {data} = await axios.get("/api/books", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -28,19 +28,14 @@ const Browse = ({searchedBooks, setUser, user}) => {
         getBooks();
     }, [user])
 
-    // useEffect(() => {
-    //     if (sortTerm === "oldest") {
-    //         const sortedBooks = [...books].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    //         setBooks(sortedBooks);
-    //         console.log(books)
-    //     } else if (sortTerm === "newest") {
-    //         const sortedBooks = [...books].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-    //         setBooks(sortedBooks);
-    //         console.log(books)
-    //     } else if (sortTerm === "all") {
-    //         setBooks()
-    //     }
-    // }, [sortTerm])
+    // useEffect(() => {     if (sortTerm === "oldest") {         const sortedBooks
+    // = [...books].sort((a, b) => new Date(b.created_at) - new
+    // Date(a.created_at));         setBooks(sortedBooks);
+    // console.log(books)     } else if (sortTerm === "newest") {         const
+    // sortedBooks = [...books].sort((a, b) => new Date(a.created_at) - new
+    // Date(b.created_at));         setBooks(sortedBooks);
+    // console.log(books)     } else if (sortTerm === "all") {         setBooks()
+    //  } }, [sortTerm])
 
     return (
         <div className="home">

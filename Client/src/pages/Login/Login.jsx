@@ -7,7 +7,8 @@ const Login = ({setUser}) => {
 
     let [inputs,
         setInputs] = useState({})
-    let [error, setError] = useState("")
+    let [error,
+        setError] = useState("")
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -21,7 +22,7 @@ const Login = ({setUser}) => {
         e.preventDefault()
 
         try {
-            let {data} = await axios.post("http://localhost:5000/api/login", inputs)
+            let {data} = await axios.post("/api/login", inputs);
             localStorage.setItem("token", data.token)
             setUser(data)
             navigate("/home")
@@ -58,8 +59,7 @@ const Login = ({setUser}) => {
                                 name="password"
                                 type="password"
                                 required
-                                id="password"/>
-                            {error && <p className="error">{error}</p>}
+                                id="password"/> {/* {error && <p className="error">{error}</p>} */}
                         </div>
                         <div className="to-register">Don't have an account?
                             <Link to="/register">Register</Link>

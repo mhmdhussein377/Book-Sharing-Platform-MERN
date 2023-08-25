@@ -41,7 +41,7 @@ const UserBook = ({
         setIsLiked(!isLiked);
 
         try {
-            await axios.put(`http://localhost:5000/api/books/${_id}/like`, {}, {
+            await axios.put(`/api/books/${_id}/like`, {}, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

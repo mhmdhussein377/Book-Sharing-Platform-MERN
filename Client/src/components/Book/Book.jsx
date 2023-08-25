@@ -56,11 +56,11 @@ const Book = ({
         setIsLiked(!isLiked)
 
         try {
-            await axios.put(`http://localhost:5000/api/books/${_id}/like`, {}, {
+            await axios.put(`/api/books/${_id}/like`, {}, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
-            })
+            });
         } catch (error) {
             console.log(error)
         }
@@ -71,17 +71,19 @@ const Book = ({
 
         try {
             if (isUserFollowed) {
-                await axios.put(`http://localhost:5000/api/users/${user._id}/unfollow`, {}, {
+                await axios.put(`/api/users/${user._id}/unfollow`, {}, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }
                 });
                 setUser(prev => ({
                     ...prev,
-                    following: prev.following.filter(friend => friend !== user._id)
+                    following: prev
+                        .following
+                        .filter(friend => friend !== user._id)
                 }))
             } else {
-                await axios.put(`http://localhost:5000/api/users/${user._id}/follow`, {}, {
+                await axios.put(`/api/users/${user._id}/follow`, {}, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }

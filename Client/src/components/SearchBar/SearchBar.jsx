@@ -7,11 +7,11 @@ const SearchBar = ({setSearchTerm, searchTerm, setSearchedBooks}) => {
     const handleSearch = async(e) => {
         e.preventDefault()
 
-        let {data} = await axios.get(`http://localhost:5000/api/books/search/${searchTerm}`, {
+        let {data} = await axios.get(`/api/books/search/${searchTerm}`, {
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem("token")}`
+                Authorization: `Bearer ${localStorage.getItem("token")}`
             }
-        })
+        });
         setSearchedBooks(data)
     }
 

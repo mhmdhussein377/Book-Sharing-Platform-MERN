@@ -1,25 +1,28 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Book from "../../components/Book/Book";
 import "./index.css"
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios"
 
 const Home = ({setUser, user}) => {
 
-    let [books, setBooks] = useState([])
+    let [books,
+        setBooks] = useState([])
 
     useEffect(() => {
         const getBooks = async() => {
-            let { data } = await axios.get("http://localhost:5000/api/books/following-books", {
+            let {data} = await axios.get("/api/books/following-books", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            const sortedBooks = data.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const sortedBooks = data
+                .slice()
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             setBooks(sortedBooks.reverse())
         }
         getBooks()
-    }, [user])  
+    }, [user])
 
     return (
         <div className="home">
@@ -29,9 +32,9 @@ const Home = ({setUser, user}) => {
                     <div className="line"></div>
                 </div>
                 <div className="books">
-                    {books.length > 0 ? books.map((book,index) => (
-                        <Book setUser={setUser} key={index} {...book} />
-                    )) : <h1>No Recommendations</h1>}
+                    {books.length > 0
+                        ? books.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>))
+                        : <h1>No Recommendations</h1>}
                 </div>
                 <div className="bottom">
                     <h2>Do you have a recommendation?</h2>

@@ -140,9 +140,12 @@ const getAllBooks = async(req, res) => {
             }
         })
             .populate("user", "_id name following");
-        return res
-            .status(200)
-            .json(books);
+        if(books.length > 0) {
+
+            return res
+                .status(200)
+                .json(books);
+        }
     } catch (error) {
         return res
             .status(500)

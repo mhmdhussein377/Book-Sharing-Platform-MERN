@@ -22,7 +22,7 @@ const Book = ({
     let [userId,
         setUserId] = useState(null);
     let [likesCount,
-        setLikesCount] = useState(likes.length)
+        setLikesCount] = useState(likes?.length)
     let [isUserFollowed,
         setIsUserFollowed] = useState(false)
 
@@ -38,15 +38,13 @@ const Book = ({
     }, []);
 
     useEffect(() => {
-        setIsLiked(likes.includes(userId))
+        setIsLiked(likes?.includes(userId))
         let userFollowing = JSON
             .parse(localStorage.getItem("user"))
             .following
-        console.log(userFollowing)
-        console.log(userFollowing.includes(user._id));
-        setIsUserFollowed(userFollowing.includes(user._id))
+        setIsUserFollowed(userFollowing?.includes(user?._id))
 
-    }, [likes, user.following])
+    }, [likes, user?.following])
 
     const handleLike = async() => {
 
@@ -112,7 +110,7 @@ const Book = ({
                     <h3 className="title">{title}</h3>
                     <p className="author">{author}</p>
                     <div className="genres">
-                        {genres.map((genre, index) => (
+                        {genres?.map((genre, index) => (
                             <div key={index} className="genre">{genre}</div>
                         ))}
                     </div>
@@ -122,7 +120,7 @@ const Book = ({
             <div className="user">
                 <div className="left">
                     Recommended by:
-                    <span>{user.name}</span>
+                    <span>{user?.name}</span>
                 </div>
                 <div onClick={handleFollow} className="follow">
                     {isUserFollowed

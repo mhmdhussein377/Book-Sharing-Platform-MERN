@@ -59,7 +59,8 @@ const Login = ({setUser}) => {
                                 name="password"
                                 type="password"
                                 required
-                                id="password"/> {/* {error && <p className="error">{error}</p>} */}
+                                id="password"/> 
+                                {error && <p className="error">{error}</p>}
                         </div>
                         <div className="to-register">Don't have an account?
                             <Link to="/register">Register</Link>

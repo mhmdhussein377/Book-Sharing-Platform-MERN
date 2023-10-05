@@ -31,7 +31,8 @@ const Register = () => {
         }
 
         try {
-            await axios.post("/api/register", inputs);
+            const response = await axios.post("/api/register", inputs);
+            console.log(response)
             navigate("/")
         } catch (error) {
             if (error.response.data === "Invalid username") {

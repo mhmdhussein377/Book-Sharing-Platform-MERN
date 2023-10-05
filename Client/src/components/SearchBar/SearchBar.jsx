@@ -12,6 +12,7 @@ const SearchBar = ({setSearchTerm, searchTerm, setSearchedBooks}) => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         });
+        console.log(data, "dataaaa")
         setSearchedBooks(data)
     }
 

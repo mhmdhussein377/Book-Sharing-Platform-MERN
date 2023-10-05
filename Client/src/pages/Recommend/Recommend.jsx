@@ -123,7 +123,7 @@ const Recommend = () => {
             console.log(error)
         }
 
-        navigate("/home")
+        navigate("/home/my-books")
     }
 
     return (

@@ -14,7 +14,7 @@ const Book = ({
     likes,
     genres,
     _id,
-    setUser
+    setUser,
 }) => {
 
     let [isLiked,
@@ -25,6 +25,12 @@ const Book = ({
         setLikesCount] = useState(likes?.length)
     let [isUserFollowed,
         setIsUserFollowed] = useState(false)
+
+    useEffect(() => {
+        if(likes) {
+            setLikesCount(likes?.length)
+        }
+    }, [likes])
 
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -98,7 +104,7 @@ const Book = ({
         }
     }
 
-    console.log(genres)
+    console.log(likesCount)
 
     return (
         <div className="book">
@@ -130,7 +136,7 @@ const Book = ({
             </div>
             <div className="likes-section">
                 <div className="likes">
-                    <span>{likesCount}</span>
+                    <span className="">{likesCount}</span>
                     Likes
                 </div>
                 <div onClick={handleLike} className="like">

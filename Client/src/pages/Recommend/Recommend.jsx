@@ -114,11 +114,12 @@ const Recommend = () => {
         }
 
         try {
-            await axios.post("/api/books", newPost, {
+            const response = await axios.post("/api/books", newPost, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
+            console.log(response)
         } catch (error) {
             console.log(error)
         }

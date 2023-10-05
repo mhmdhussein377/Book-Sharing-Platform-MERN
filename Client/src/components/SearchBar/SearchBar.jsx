@@ -1,29 +1,44 @@
 import {AiOutlineSearch} from "react-icons/ai";
 import "./index.css"
 import axios from "axios";
+import {useEffect} from "react";
 
 const SearchBar = ({setSearchTerm, searchTerm, setSearchedBooks}) => {
 
-    const handleSearch = async(e) => {
-        e.preventDefault()
-
-        let {data} = await axios.get(`/api/books/search/${searchTerm}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`
+    useEffect(() => {
+        const getSearchBooks = async() => {
+            try {
+                let {data} = await axios.get(`/api/books/search/${searchTerm}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+                return data
+            } catch (error) {
+                console.log(error)
+                return []
             }
-        });
-        console.log(data, "dataaaa")
-        setSearchedBooks(data)
-    }
+        }
+        if (searchTerm) {
+            const fetchData = async() => {
+                const data = await getSearchBooks();
+                setSearchedBooks(data);
+            };
+
+            fetchData();
+        }else {
+            setSearchedBooks([])
+        }
+    }, [searchTerm])
 
     return (
         <div className="searchBar">
-            <form onSubmit={handleSearch}>
+            <form>
                 <input
                     onChange={e => setSearchTerm(e.target.value)}
                     type="text"
                     placeholder="Search books"/>
-                <button type="submit">
+                <button>
                     <AiOutlineSearch size={25}/>
                 </button>
             </form>

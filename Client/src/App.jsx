@@ -80,7 +80,8 @@ function App() {
                     }
                     searchedBooks = {
                         searchedBooks
-                    } />}/>
+                    }
+                    searchTerm={searchTerm} />}/>
                     <Route
                         path="/home/my-books"
                         element={< MyBooks user = {

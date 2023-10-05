@@ -117,7 +117,14 @@ const SearchBooks = async(req, res) => {
                         $regex: searchTerm,
                         $options: 'i'
                     }
+                },
+                {
+                    title: {
+                        $regex: searchTerm,
+                        $options: 'i'
+                    }
                 }
+
             ]
         }).populate("user", "_id name following")
         res

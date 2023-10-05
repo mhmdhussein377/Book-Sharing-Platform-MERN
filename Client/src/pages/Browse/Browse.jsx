@@ -4,27 +4,38 @@ import axios from "axios"
 import {Link} from "react-router-dom";
 import Book from "../../components/Book/Book";
 
-const Browse = ({searchedBooks, setUser, user}) => {
+const Browse = ({searchedBooks, setUser, user, searchTerm}) => {
 
     let [books,
         setBooks] = useState([])
+    let [searched,
+        setSearched] = useState([])
     let [sortTerm,
         setSortTerm] = useState("")
 
+    console.log(searchedBooks, "searchedBOOKS")
+    console.log(searched, "searchedeeeddd")
+    console.log(books, "boooooks")
+
     useEffect(() => {
+        setSearched(searchedBooks)
+    }, [searchedBooks])
+
+    useEffect(() => {
+        console.log("innn")
         const getBooks = async() => {
+            console.log("one")
             let {data} = await axios.get("/api/books", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            const sortedBooks = data
-                .slice()
-                .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-            setBooks(data.reverse());
+            console.log("twoo")
+            console.log(data)
+            setBooks(data);
         };
         getBooks();
-    }, [user])
+    }, [])
 
     return (
         <div className="home">
@@ -59,8 +70,12 @@ const Browse = ({searchedBooks, setUser, user}) => {
                     </div>
                 </div>
                 <div className="books">
-                    {searchedBooks.length > 0
-                        ? (searchedBooks.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
+                    {searchTerm?.length > 0
+                        ? (searched.length > 0
+                            ? (searched.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
+                            : (
+                                <h1>No Result</h1>
+                            ))
                         : books.length > 0
                             ? (books.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
                             : (

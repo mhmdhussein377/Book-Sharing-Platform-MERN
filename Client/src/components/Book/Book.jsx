@@ -104,7 +104,7 @@ const Book = ({
         }
     }
 
-    console.log(likesCount)
+    console.log(isLiked, "isLikeeed")
 
     return (
         <div className="book">

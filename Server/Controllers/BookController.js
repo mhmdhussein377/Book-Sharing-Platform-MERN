@@ -34,7 +34,7 @@ const FollowingBooks = async(req, res) => {
             return User.findById(followingId);
         }));
 
-        let postsIds = [];
+        let postsIds = []; 
 
         users.map((user) => postsIds.push(...user.posts));
 
@@ -124,7 +124,6 @@ const SearchBooks = async(req, res) => {
                         $options: 'i'
                     }
                 }
-
             ]
         }).populate("user", "_id name following")
         res

@@ -12,7 +12,7 @@ import axios from 'axios'
 
 function App() {
 
-    axios.defaults.baseURL = "http://localhost:5000";
+    axios.defaults.baseURL = "https://book-sharing-platform-server.onrender.com";
 
     let [user,
         setUser] = useState(JSON.parse(localStorage.getItem("user")) || null)

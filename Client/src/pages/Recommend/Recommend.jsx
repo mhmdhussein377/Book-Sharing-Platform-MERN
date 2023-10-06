@@ -78,8 +78,6 @@ const Recommend = () => {
             }
         })
 
-        console.log(checkedGenres)
-
         let genresToSend = checkedGenres.map(item => {
             return item.label
         })

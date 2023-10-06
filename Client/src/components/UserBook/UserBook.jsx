@@ -55,7 +55,9 @@ const UserBook = ({
         <div className="book">
             <div className="book-details">
                 <div className="img">
-                    <img src={`http://localhost:5000/images/${picture}`} alt=""/>
+                    <img
+                        src={`https://book-sharing-platform-server.onrender.com/images/${picture}`}
+                        alt=""/>
                 </div>
                 <div className="content">
                     <h3 className="title">{title}</h3>

@@ -14,7 +14,7 @@ const Book = ({
     likes,
     genres,
     _id,
-    setUser,
+    setUser
 }) => {
 
     let [isLiked,
@@ -22,13 +22,15 @@ const Book = ({
     let [userId,
         setUserId] = useState(null);
     let [likesCount,
-        setLikesCount] = useState(likes?.length)
+        setLikesCount] = useState(likes
+        ?.length)
     let [isUserFollowed,
         setIsUserFollowed] = useState(false)
 
     useEffect(() => {
-        if(likes) {
-            setLikesCount(likes?.length)
+        if (likes) {
+            setLikesCount(likes
+                ?.length)
         }
     }, [likes])
 
@@ -44,13 +46,19 @@ const Book = ({
     }, []);
 
     useEffect(() => {
-        setIsLiked(likes?.includes(userId))
+        setIsLiked(likes
+            ?.includes(userId))
         let userFollowing = JSON
             .parse(localStorage.getItem("user"))
             .following
-        setIsUserFollowed(userFollowing?.includes(user?._id))
+        setIsUserFollowed(userFollowing
+            ?.includes(user
+                ?._id))
 
-    }, [likes, user?.following])
+    }, [
+        likes, user
+            ?.following
+    ])
 
     const handleLike = async() => {
 
@@ -110,15 +118,20 @@ const Book = ({
         <div className="book">
             <div className="book-details">
                 <div className="img">
-                    <img src={`http://localhost:5000/images/${picture}`} alt=""/>
+                    <img
+                        src={`https://book-sharing-platform-server.onrender.com/images/${picture}`}
+                        alt=""/>
                 </div>
                 <div className="content">
                     <h3 className="title">{title}</h3>
                     <p className="author">{author}</p>
                     <div className="genres">
-                        {genres?.map((genre, index) => (
-                            <div key={index} className="genre">{genre}</div>
-                        ))}
+                        {genres
+                            ?.map((genre, index) => (
+                                <div key={index} className="genre">
+                                    {genre}
+                                </div>
+                            ))}
                     </div>
                     {review && <div className="review">{review}</div>}
                 </div>
@@ -126,12 +139,13 @@ const Book = ({
             <div className="user">
                 <div className="left">
                     Recommended by:
-                    <span>{user?.name}</span>
+                    <span>{user
+                            ?.name}</span>
                 </div>
                 <div onClick={handleFollow} className="follow">
                     {isUserFollowed
-                        ? <PiMinusSquare size={35}/>
-                        : <AiOutlinePlusSquare size={35}/>}
+                        ? (<PiMinusSquare size={35}/>)
+                        : (<AiOutlinePlusSquare size={35}/>)}
                 </div>
             </div>
             <div className="likes-section">

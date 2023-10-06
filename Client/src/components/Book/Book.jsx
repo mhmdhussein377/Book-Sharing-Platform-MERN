@@ -20,7 +20,7 @@ const Book = ({
     let [isLiked,
         setIsLiked] = useState(false)
     let [userId,
-        setUserId] = useState(null);
+        setUserId] = useState(JSON.parse(localStorage.getItem("user"))._id);
     let [likesCount,
         setLikesCount] = useState(likes
         ?.length)
@@ -34,20 +34,21 @@ const Book = ({
         }
     }, [likes])
 
-    useEffect(() => {
-        const token = localStorage.getItem("token")
-        try {
-            const tokenPayload = token.split(".")[1];
-            const decodedPayload = JSON.parse(atob(tokenPayload));
-            setUserId(decodedPayload.id);
-        } catch (error) {
-            console.error("Error decoding token:", error);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token")
+    //     try {
+    //         const tokenPayload = token.split(".")[1];
+    //         const decodedPayload = JSON.parse(atob(tokenPayload));
+    //         setUserId(decodedPayload.id);
+    //     } catch (error) {
+    //         console.error("Error decoding token:", error);
+    //     }
+    // }, []);
 
     useEffect(() => {
         setIsLiked(likes
             ?.includes(userId))
+        console.log(userId)
         let userFollowing = JSON
             .parse(localStorage.getItem("user"))
             .following
@@ -55,10 +56,7 @@ const Book = ({
             ?.includes(user
                 ?._id))
 
-    }, [
-        likes, user
-            ?.following
-    ])
+    }, [likes, user?.following])
 
     const handleLike = async() => {
 

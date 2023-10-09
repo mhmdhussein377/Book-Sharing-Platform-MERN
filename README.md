@@ -16,13 +16,18 @@
 <a name="project-description"></a>
 <img src="./readme/title2.svg"/>
 
-> 
+> A platform dedicated to book lovers, where users can connect, share, and discover their favorite books.
 >
-> 
+> It offers a seamless experience for book enthusiasts to connect with like-minded individuals, share their book recommendations, and explore a world of literature.
 
 <a name="user-stories"></a>
 ### User Stories
-
+- As a user, I want to create an account and log in.
+- As a user, I want to post my favorite books with details.
+- As a user, I want to discover books by genre, author, or keywords.
+- As a user, I want to follow and unfollow other users.
+- As a user, I want to like books.
+- As a user, I want to see book recommendations from people I follow.
 
 <br><br>
 
@@ -44,9 +49,10 @@
 <a name="tech-stack"></a>
 <img src="./readme/title5.svg"/>
 
-###  UniConnect is built using the following technologies:
-
-
+###  Book Sharing is built using the following technologies:
+- React: The frontend is developed with React, providing a dynamic and responsive user interface.
+- Node.js with Express: The backend is powered by Node.js, using the Express.js framework to handle routing, authentication, and other server-side functionalities.
+- MongoDB: MongoDB serves as the database to store user information, book data, and user interactions.
 
 <br><br>
 

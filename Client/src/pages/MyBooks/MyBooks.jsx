@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom';
-import Book from '../../components/Book/Book';
 import UserBook from '../../components/UserBook/UserBook';
 import axios from 'axios';
 
 const MyBooks = () => {
 
-    let [myBooks,
+    const [myBooks,
         setMyBooks] = useState([])
 
     useEffect(() => {
@@ -16,15 +15,11 @@ const MyBooks = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            const sortedBooks = data
-                .slice()
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const sortedBooks = data.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             setMyBooks(sortedBooks.reverse());
         };
         getBooks();
     }, [])
-
-    console.log(myBooks)
 
     return (
         <div className="home">

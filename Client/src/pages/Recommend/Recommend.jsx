@@ -4,25 +4,45 @@ import axios from "axios"
 import {useNavigate} from "react-router-dom"
 import {AiOutlinePlus} from 'react-icons/ai'
 import {HiOutlineChevronUp, HiOutlineChevronDown} from "react-icons/hi";
+import TextInput from "../../components/UI/TextInput";
+
+const inputFields = [
+    {
+        label: "Book title",
+        name: "book-title",
+        type: "text",
+        state: "title"
+    }, {
+        label: "Author's name",
+        name: "author-name",
+        type: "text",
+        state: "authorName"
+    },
+];
 
 const Recommend = () => {
 
-    let [title,
-        setTitle] = useState("")
-    let [authorName,
-        setAuthorname] = useState("")
-    let [review,
+    const [formData,
+        setFormData] = useState({title: "", authorName: ""});
+    const [review,
         setReview] = useState("")
-    let [file,
+    const [file,
         setFile] = useState(null)
-    let [photoError,
+    const [photoError,
         setPhotoError] = useState(false)
-    let [isListOpened,
+    const [isListOpened,
         setIsListOpened] = useState(false)
-    const photoRef = useRef()
-    const navigate = useNavigate()
-
-    const genresInitial = [
+        const photoRef = useRef()
+        const navigate = useNavigate()
+        
+        const handleInputChange = (e, stateName) => {
+            setFormData({
+                ...formData,
+                [stateName]: e.target.value
+            });
+        };
+        
+        const genresInitial = [
         {
             id: 1,
             label: "Personal Development"
@@ -49,7 +69,7 @@ const Recommend = () => {
 
     const [genres,
         setGenres] = useState(genresInitial);
-
+    
     const handleCheckboxChange = (id) => {
         const updatedItems = genres.map((item) => item.id === id
             ? {
@@ -58,7 +78,6 @@ const Recommend = () => {
             }
             : item);
         setGenres(updatedItems);
-        console.log(genres)
     };
 
     const handleSubmit = async(e) => {
@@ -83,13 +102,11 @@ const Recommend = () => {
         })
 
         let newPost = {
-            title,
-            author: authorName,
+            title: formData.title,
+            author: formData.authorName,
             review,
             genres: genresToSend
         }
-
-        console.log(newPost)
 
         let data;
 
@@ -117,12 +134,19 @@ const Recommend = () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            console.log(response)
         } catch (error) {
             console.log(error)
         }
 
         navigate("/home/my-books")
+    }
+
+    const handlePhotoUpload = () => {
+        photoRef.current.click();
+    }
+
+    const handleOpenList = () => {
+        setIsListOpened(!isListOpened);
     }
 
     return (
@@ -134,39 +158,31 @@ const Recommend = () => {
                         <div className="line"></div>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="input">
-                            <label htmlFor="book-title">Book title</label>
-                            <input
-                                onChange={(e) => setTitle(e.target.value)}
-                                required
-                                type="text"
-                                id="book-title"/>
-                        </div>
-                        <div className="input">
-                            <label htmlFor="author-name">Author's name</label>
-                            <input
-                                required
-                                onChange={(e) => setAuthorname(e.target.value)}
-                                type="text"
-                                id="author-name"/>
-                        </div>
+                        {inputFields.map(({label, name, type, state}) => (<TextInput
+                            key={name}
+                            label={label}
+                            name={name}
+                            type={type}
+                            value={formData[state]}
+                            onChange={(e) => handleInputChange(e, state)}
+                            required/>))}
                         <div className="genres-input">
                             <div className="main-checkbox">
                                 <label htmlFor="genres">Genres</label>
-                                <div onClick={(e) => setIsListOpened(!isListOpened)} className="top">
+                                <div onClick={handleOpenList} className="top">
                                     <span>Select genres</span>
                                     {isListOpened
-                                        ? <HiOutlineChevronUp size={25}/>
-                                        : <HiOutlineChevronDown size={25}/>}
+                                        ? (<HiOutlineChevronUp size={25}/>)
+                                        : (<HiOutlineChevronDown size={25}/>)}
                                 </div>
                                 <div className={`checkbox-list ${isListOpened && "open"}`}>
-                                    {genres.map((genre) => (
-                                        <label key={genre.id} className="item">
+                                    {genres.map(({id, checked, label}) => (
+                                        <label key={id} className="item">
                                             <input
-                                                checked={genre.checked || false}
-                                                onChange={() => handleCheckboxChange(genre.id)}
+                                                checked={checked || false}
+                                                onChange={() => handleCheckboxChange(id)}
                                                 type="checkbox"/>
-                                            <span>{genre.label}</span>
+                                            <span>{label}</span>
                                         </label>
                                     ))}
                                 </div>
@@ -188,7 +204,7 @@ const Recommend = () => {
                             style={{
                             display: "none"
                         }}/>
-                        <div className="photo-upload" onClick={(e) => photoRef.current.click()}>
+                        <div className="photo-upload" onClick={handlePhotoUpload}>
                             Add a photo
                         </div>
                         {photoError && <p className="photo-error">A photo is required</p>}

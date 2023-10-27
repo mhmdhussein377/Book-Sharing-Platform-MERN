@@ -1,4 +1,3 @@
-import React from "react";
 
 const TextInput = ({
     label,
@@ -17,7 +16,8 @@ const TextInput = ({
                 id={name}
                 value={value}
                 onChange={onChange}
-                required/> {error && <p className="error">{error}</p>}
+                required/> 
+            {error && <p className="error">{error}</p>}
         </div>
     );
 };

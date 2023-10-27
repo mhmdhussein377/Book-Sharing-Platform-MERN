@@ -2,12 +2,13 @@ import {useState} from "react";
 import "./index.css"
 import axios from "axios"
 import {Link, useNavigate} from 'react-router-dom'
+import TextInput from "../../components/UI/TextInput";
 
 const Login = ({setUser}) => {
 
-    let [inputs,
+    const [inputs,
         setInputs] = useState({})
-    let [error,
+    const [error,
         setError] = useState("")
     const navigate = useNavigate()
 
@@ -23,7 +24,6 @@ const Login = ({setUser}) => {
 
         try {
             let {data} = await axios.post("/api/login", inputs);
-            console.log(data)
             localStorage.setItem("token", data.token)
             setUser(data)
             navigate("/home")
@@ -35,6 +35,18 @@ const Login = ({setUser}) => {
         }
     }
 
+    const inputFields = [
+        {
+            label: "Email",
+            name: "email",
+            type: "email"
+        }, {
+            label: "Password",
+            name: "password",
+            type: "password"
+        }
+    ];
+
     return (
         <div className="login">
             <div className="container">
@@ -44,26 +56,18 @@ const Login = ({setUser}) => {
                         <div className="line"></div>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="input">
-                            <label htmlFor="email">Email</label>
-                            <input
-                                onChange={e => handleChange(e)}
-                                name="email"
-                                type="email"
-                                required
-                                id="email"/>
-                        </div>
-                        <div className="input">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                onChange={e => handleChange(e)}
-                                name="password"
-                                type="password"
-                                required
-                                id="password"/> 
-                                {error && <p className="error">{error}</p>}
-                        </div>
-                        <div className="to-register">Don't have an account?
+                        {inputFields.map(({label, name, type}) => (<TextInput
+                            key={name}
+                            label={label}
+                            name={name}
+                            type={type}
+                            value={inputs[name]}
+                            onChange={e => handleChange(e)}
+                            error={name === "password"
+                            ? error
+                            : null}/>))}
+                        <div className="to-register">
+                            Don't have an account?
                             <Link to="/register">Register</Link>
                         </div>
                         <button type="submit">Login</button>

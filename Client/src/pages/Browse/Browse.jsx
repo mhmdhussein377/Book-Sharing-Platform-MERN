@@ -68,7 +68,7 @@ const Browse = ({searchedBooks, setUser, searchTerm}) => {
                 </div>
                 <div className="sort-by">
                     {renderSelect("category")}
-                    {renderSelect("data")}
+                    {renderSelect("date")}
                 </div>
                 <div className="books">
                     {searchTerm?.length > 0

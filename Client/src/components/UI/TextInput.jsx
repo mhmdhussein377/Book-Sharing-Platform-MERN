@@ -5,7 +5,8 @@ const TextInput = ({
     type,
     value,
     onChange,
-    error
+    error,
+    minLength
 }) => {
     return (
         <div className="input">
@@ -16,6 +17,7 @@ const TextInput = ({
                 id={name}
                 value={value}
                 onChange={onChange}
+                minLength={minLength ? minLength : null}
                 required/> 
             {error && <p className="error">{error}</p>}
         </div>

@@ -2,15 +2,35 @@ import {useState} from 'react';
 import './index.css'
 import {Link, useNavigate} from "react-router-dom"
 import axios from "axios"
+import TextInput from '../../components/UI/TextInput';
+
+const inputFields = [
+    {
+        label: "Name",
+        name: "name",
+        type: "text",
+    }, {
+        label: "Username",
+        name: "username",
+        type: "text",
+    }, {
+        label: "Email",
+        name: "email",
+        type: "email",
+    }, {
+        label: "Password",
+        name: "password",
+        type: "password",
+        minLength: 6
+    }
+];
 
 const Register = () => {
 
-    let [inputs,
+    const [inputs,
         setInputs] = useState({})
-    let [usernameError,
-        setUsernameError] = useState("")
-    let [emailError,
-        setEmailError] = useState("")
+    const [errors,
+        setErrors] = useState({})
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -23,22 +43,21 @@ const Register = () => {
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        function timeOut(error, setError) {
-            setError(error.response.data);
+        function timeOut(error, setErrors, errorName) {
+            setErrors(prev => ({...prev, [errorName]: error.response.data}));
             setTimeout(() => {
-                setError("");
+                setErrors({});
             }, 3000);
         }
 
         try {
-            const response = await axios.post("/api/register", inputs);
-            console.log(response)
+            await axios.post("/api/register", inputs);
             navigate("/")
         } catch (error) {
             if (error.response.data === "Invalid username") {
-                timeOut(error, setUsernameError)
+                timeOut(error, setErrors, "username")
             } else {
-                timeOut(error, setEmailError)
+                timeOut(error, setErrors, "email")
             }
         }
     }
@@ -52,43 +71,20 @@ const Register = () => {
                         <div className="line"></div>
                     </div>
                     <form onSubmit={handleSubmit}>
-                        <div className="input">
-                            <label htmlFor="name">Name</label>
-                            <input
-                                onChange={(e) => handleChange(e)}
-                                name="name"
-                                type="text"
-                                required
-                                id="name"/>
-                        </div>
-                        <div className="input">
-                            <label htmlFor="username">Username</label>
-                            <input
-                                onChange={(e) => handleChange(e)}
-                                name="username"
-                                type="text"
-                                required
-                                id="username"/> {usernameError && <p className="error">{usernameError}</p>}
-                        </div>
-                        <div className="input">
-                            <label htmlFor="email">Email</label>
-                            <input
-                                onChange={(e) => handleChange(e)}
-                                name="email"
-                                type="email"
-                                required
-                                id="email"/> {emailError && <p className="error">{emailError}</p>}
-                        </div>
-                        <div className="input">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                onChange={(e) => handleChange(e)}
-                                name="password"
-                                type="password"
-                                required
-                                minLength={6}
-                                id="password"/>
-                        </div>
+                        {inputFields.map(({
+                            label,
+                            name,
+                            type,
+                            minLength
+                        }, index) => (<TextInput
+                            key={index}
+                            label={label}
+                            name={name}
+                            type={type}
+                            value={inputs[name] || ""}
+                            onChange={e => handleChange(e)}
+                            minLength={minLength}
+                            error={errors[name]}/>))}
                         <div className="to-login">
                             Already have an account?
                             <Link to="/">Login</Link>

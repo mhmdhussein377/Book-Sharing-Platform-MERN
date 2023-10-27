@@ -4,38 +4,59 @@ import axios from "axios"
 import {Link} from "react-router-dom";
 import Book from "../../components/Book/Book";
 
-const Browse = ({searchedBooks, setUser, user, searchTerm}) => {
+const Browse = ({searchedBooks, setUser, searchTerm}) => {
 
-    let [books,
+    const [books,
         setBooks] = useState([])
-    let [searched,
+    const [searched,
         setSearched] = useState([])
-    let [sortTerm,
-        setSortTerm] = useState("")
-
-    console.log(searchedBooks, "searchedBOOKS")
-    console.log(searched, "searchedeeeddd")
-    console.log(books, "boooooks")
+    const [sortTerm,
+        setSortTerm] = useState(null)
 
     useEffect(() => {
         setSearched(searchedBooks)
     }, [searchedBooks])
 
     useEffect(() => {
-        console.log("innn")
         const getBooks = async() => {
-            console.log("one")
             let {data} = await axios.get("/api/books", {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            console.log("twoo")
-            console.log(data)
             setBooks(data);
         };
         getBooks();
     }, [])
+
+    const options = {
+        category: [
+            "All",
+            "Personal Development",
+            "Communication",
+            "Finance",
+            "Productivity",
+            "Design",
+            "Marketing",
+            "Biography"
+        ],
+        date: ["Newest", "Oldest"]
+    };
+
+    const renderSelect = (optionType) => {
+        const sortType = `${optionType}-sort`
+
+        return <div key={optionType} className={sortType}>
+            <label htmlFor={sortType}>Category</label>
+            <select onChange={(e) => setSortTerm(e.target.value)} id={sortType}>
+                {options[optionType].map((option, index) => (
+                    <option key={index} value={option}>
+                        {option}
+                    </option>
+                ))}
+            </select>
+        </div>
+    }
 
     return (
         <div className="home">
@@ -46,41 +67,21 @@ const Browse = ({searchedBooks, setUser, user, searchTerm}) => {
                     <p>Browse all books or select a category</p>
                 </div>
                 <div className="sort-by">
-                    <div className="category-sort">
-                        <label htmlFor="category-sort">Category:</label>
-                        <select onChange={(e) => setSortTerm(e.target.value)} id="category-sort">
-                            <option value="all">All</option>
-                            <option value="Personal Development">
-                                Personal Development
-                            </option>
-                            <option value="Communication">Communication</option>
-                            <option value="Finance">Finance</option>
-                            <option value="Productivity">Productivity</option>
-                            <option value="Design">Design</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Biography">Biography</option>
-                        </select>
-                    </div>
-                    <div className="date-sort">
-                        <label htmlFor="date-sort">Category:</label>
-                        <select onChange={(e) => setSortTerm(e.target.value)} id="date-sort">
-                            <option value="newest">Newest</option>
-                            <option value="oldest">Oldest</option>
-                        </select>
-                    </div>
+                    {renderSelect("category")}
+                    {renderSelect("data")}
                 </div>
                 <div className="books">
                     {searchTerm?.length > 0
-                        ? (searched.length > 0
-                            ? (searched.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
-                            : (
-                                <h1>No Result</h1>
-                            ))
-                        : books.length > 0
-                            ? (books.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
-                            : (
-                                <h1>No Recommendations</h1>
-                            )}
+                            ? (searched.length > 0
+                                ? (searched.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
+                                : (
+                                    <h1>No Result</h1>
+                                ))
+                            : books.length > 0
+                                ? (books.map((book, index) => (<Book setUser={setUser} key={index} {...book}/>)))
+                                : (
+                                    <h1>No Recommendations</h1>
+                                )}
                 </div>
                 <div className="bottom">
                     <h2>Do you have a recommendation?</h2>

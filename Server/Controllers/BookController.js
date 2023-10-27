@@ -148,6 +148,8 @@ const getAllBooks = async(req, res) => {
             .populate("user", "_id name following");
         if(books.length > 0) {
 
+            console.log(books)
+
             return res
                 .status(200)
                 .json(books);

@@ -6,7 +6,7 @@ import axios from "axios"
 
 const Home = ({setUser, user}) => {
 
-    let [books,
+    const [books,
         setBooks] = useState([])
 
     useEffect(() => {
@@ -16,16 +16,10 @@ const Home = ({setUser, user}) => {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-            console.log(data)
-            // const sortedBooks = data
-            //     .slice()
-            //     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             setBooks(data);
         }
         getBooks()
     }, [user])
-
-    console.log(books)
 
     return (
         <div className="home">

@@ -19,17 +19,6 @@ const UserBook = ({
     let [likesCount,
         setLikesCount] = useState(likes.length);
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
-    //     try {
-    //         const tokenPayload = token.split(".")[1];
-    //         const decodedPayload = JSON.parse(atob(tokenPayload));
-    //         setUserId(decodedPayload.id);
-    //     } catch (error) {
-    //         console.error("Error decoding token:", error);
-    //     }
-    // }, []);
-
     useEffect(() => {
         setIsLiked(likes.includes(userId));
     }, [likes]);
@@ -56,7 +45,7 @@ const UserBook = ({
             <div className="book-details">
                 <div className="img">
                     <img
-                        src={`https://book-sharing-platform-server.onrender.com/images/${picture}`}
+                        src={`http://localhost:5000/images/${picture}`}
                         alt=""/>
                 </div>
                 <div className="content">

@@ -12,7 +12,8 @@ import axios from 'axios'
 
 function App() {
 
-    axios.defaults.baseURL = "https://book-sharing-platform-server.onrender.com";
+    // axios.defaults.baseURL = "https://book-sharing-platform-server.onrender.com";
+    axios.defaults.baseURL = "http://localhost:5000";
 
     let [user,
         setUser] = useState(JSON.parse(localStorage.getItem("user")) || null)
@@ -81,7 +82,9 @@ function App() {
                     searchedBooks = {
                         searchedBooks
                     }
-                    searchTerm={searchTerm} />}/>
+                    searchTerm = {
+                        searchTerm
+                    } />}/>
                     <Route
                         path="/home/my-books"
                         element={< MyBooks user = {

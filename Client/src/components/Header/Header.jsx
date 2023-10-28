@@ -1,35 +1,53 @@
-import "./index.css"
-import {Link, useNavigate} from "react-router-dom"
+import "./index.css";
+import {Link, useNavigate} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import {FaBars} from "react-icons/fa";
-import {useEffect, useState} from "react";
-import {GrClose} from "react-icons/gr"
+import {useState} from "react";
+import {GrClose} from "react-icons/gr";
+import CustomLink from "./../../components/UI/CustomLink";
 
-const Header = ({handleModeToggle, setUser, setSearchTerm, searchTerm, setSearchedBooks}) => {
-
-    let [isNavbarOpened,
-        setIsNavbarOpened] = useState(false)
-    const navigate = useNavigate()
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-    }
+const Header = ({setUser, setSearchTerm, searchTerm, setSearchedBooks}) => {
+    const [isNavbarOpened,
+        setIsNavbarOpened] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("token")
-        setUser({})
-        navigate("/")
+        localStorage.removeItem("token");
+        setUser({});
+        navigate("/");
+    };
+
+    const setNavbar = (value) => {
+        setIsNavbarOpened(value)
     }
 
-    const location = useLocation()
-    const currentPathname = location.pathname
+    const location = useLocation();
+    const currentPathname = location.pathname;
+
+    const links = [
+        {
+            to: "/home/browse",
+            text: "All books",
+            className: "all-books"
+        }, {
+            to: "/home/my-books",
+            text: "My books",
+            className: "my-books"
+        }, {
+            to: "/home/recommend",
+            text: "Suggest a book",
+            className: "suggest-book"
+        }
+    ];
 
     return (
         <div className={`header small`}>
             <div className="container">
                 <Link to="/home">
-                    <div id="logo" className="logo">BookRev</div>
+                    <div id="logo" className="logo">
+                        BookRev
+                    </div>
                 </Link>
                 {currentPathname === "/home/browse" && (<SearchBar
                     setSearchedBooks={setSearchedBooks}
@@ -37,48 +55,23 @@ const Header = ({handleModeToggle, setUser, setSearchTerm, searchTerm, setSearch
                     setSearchTerm={setSearchTerm}/>)}
                 <div className="right-header">
                     <div className="buttons">
-                        <Link to="/home/browse">
-                            <div className="all-books">
-                                <button>All books</button>
-                            </div>
-                        </Link>
-                        <Link to="/home/my-books">
-                            <div className="my-books">
-                                <button>My books</button>
-                            </div>
-                        </Link>
-                        <Link to="/home/recommend">
-                            <div className="suggest-book">
-                                <button>Suggest a book</button>
-                            </div>
-                        </Link>
+                        {links.map((link, index) => (<CustomLink key={index} {...link}/>))}
                         <div onClick={handleLogout} className="logout">
                             Logout
                         </div>
                     </div>
-                    <div onClick={(e) => setIsNavbarOpened(true)} className="burger-icon">
+                    <div onClick={() => setNavbar(true)} className="burger-icon">
                         <FaBars size={25}/>
                     </div>
                     <div className={`absolute-buttons ${isNavbarOpened && "show"}`}>
-                        <Link onClick={e => setIsNavbarOpened(false)} to="/home/browse">
-                            <div className="all-books">
-                                <button>All books</button>
-                            </div>
-                        </Link>
-                        <Link onClick={e => setIsNavbarOpened(false)} to="/home/my-books">
-                            <div className="my-books">
-                                <button>My books</button>
-                            </div>
-                        </Link>
-                        <Link onClick={e => setIsNavbarOpened(false)} to="/home/recommend">
-                            <div className="suggest-book">
-                                <button>Suggest a book</button>
-                            </div>
-                        </Link>
+                        {links.map((link, index) => 
+                        (<CustomLink key={index} {...link} onClick={() => setNavbar(false)}/>))}
                         <div onClick={handleLogout} className="logout">
                             Logout
                         </div>
-                        <div onClick={e => setIsNavbarOpened(false)} className="close"><GrClose size={25}/></div>
+                        <div onClick={() => setNavbar(false)} className="close">
+                            <GrClose size={25}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,6 +83,6 @@ const Header = ({handleModeToggle, setUser, setSearchTerm, searchTerm, setSearch
             </div>
         </div>
     );
-}
+};
 
-export default Header
+export default Header;

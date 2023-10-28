@@ -1,44 +1,31 @@
 import {FcLike, FcLikePlaceholder} from "react-icons/fc";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { handleBookLike } from "../../utils/handleLike";
 
 const UserBook = ({
     author,
     title,
     picture,
-    user,
     review,
     likes,
     genres,
     _id
 }) => {
-    let [isLiked,
+    const [isLiked,
         setIsLiked] = useState(false);
-    let [userId,
+    const [userId,
         setUserId] = useState(JSON.parse(localStorage.getItem("user"))._id);
-    let [likesCount,
-        setLikesCount] = useState(likes.length);
+    const [likesCount,
+        setLikesCount] = useState(likes?.length);
 
     useEffect(() => {
         setIsLiked(likes.includes(userId));
     }, [likes]);
 
-    const handleLike = async() => {
-        isLiked
-            ? setLikesCount(likesCount - 1)
-            : setLikesCount(likesCount + 1);
-        setIsLiked(!isLiked);
-
-        try {
-            await axios.put(`/api/books/${_id}/like`, {}, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const handleLike = () => {
+        handleBookLike(isLiked, setIsLiked, likesCount, setLikesCount, _id)
+    }
 
     return (
         <div className="book">

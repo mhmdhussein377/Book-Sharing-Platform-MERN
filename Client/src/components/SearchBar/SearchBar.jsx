@@ -8,7 +8,7 @@ const SearchBar = ({setSearchTerm, searchTerm, setSearchedBooks}) => {
     useEffect(() => {
         const getSearchBooks = async() => {
             try {
-                let {data} = await axios.get(`/api/books/search/${searchTerm}`, {
+                const {data} = await axios.get(`/api/books/search/${searchTerm}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }

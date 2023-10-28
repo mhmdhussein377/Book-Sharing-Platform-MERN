@@ -4,6 +4,7 @@ import {FcLike, FcLikePlaceholder} from "react-icons/fc";
 import {PiMinusSquare} from 'react-icons/pi'
 import {useEffect, useState} from "react"
 import axios from "axios"
+import { handleBookLike } from "../../utils/handleLike";
 
 const Book = ({
     author,
@@ -37,24 +38,8 @@ const Book = ({
         setIsUserFollowed(userFollowing?.includes(user?._id))
     }, [likes, user?.following])
 
-    const handleLike = async() => {
-
-        const isLikedNow = !isLiked;
-        const updatedLikesCount = isLikedNow
-            ? likesCount + 1
-            : likesCount - 1;
-        setLikesCount(updatedLikesCount);
-        setIsLiked(isLikedNow);
-
-        try {
-            await axios.put(`/api/books/${_id}/like`, {}, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
-            });
-        } catch (error) {
-            console.log(error)
-        }
+    const handleLike = () => {
+        handleBookLike(isLiked, setIsLiked, likesCount, setLikesCount, _id)
     }
 
     const handleFollow = async() => {

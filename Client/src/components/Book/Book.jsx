@@ -17,53 +17,34 @@ const Book = ({
     setUser
 }) => {
 
-    let [isLiked,
+    const [isLiked,
         setIsLiked] = useState(false)
-    let [userId,
+    const [userId,
         setUserId] = useState(JSON.parse(localStorage.getItem("user"))._id);
-    let [likesCount,
-        setLikesCount] = useState(likes
-        ?.length)
-    let [isUserFollowed,
+    const [likesCount,
+        setLikesCount] = useState(likes?.length)
+    const [isUserFollowed,
         setIsUserFollowed] = useState(false)
 
     useEffect(() => {
-        if (likes) {
-            setLikesCount(likes
-                ?.length)
-        }
-    }, [likes])
-
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token")
-    //     try {
-    //         const tokenPayload = token.split(".")[1];
-    //         const decodedPayload = JSON.parse(atob(tokenPayload));
-    //         setUserId(decodedPayload.id);
-    //     } catch (error) {
-    //         console.error("Error decoding token:", error);
-    //     }
-    // }, []);
+        if (likes) 
+            setLikesCount(likes?.length)
+        }, [likes])
 
     useEffect(() => {
-        setIsLiked(likes
-            ?.includes(userId))
-        console.log(userId)
-        let userFollowing = JSON
-            .parse(localStorage.getItem("user"))
-            .following
-        setIsUserFollowed(userFollowing
-            ?.includes(user
-                ?._id))
-
+        setIsLiked(likes?.includes(userId))
+        let userFollowing = JSON.parse(localStorage.getItem("user")).following
+        setIsUserFollowed(userFollowing?.includes(user?._id))
     }, [likes, user?.following])
 
     const handleLike = async() => {
 
-        isLiked
-            ? setLikesCount(likesCount - 1)
-            : setLikesCount(likesCount + 1)
-        setIsLiked(!isLiked)
+        const isLikedNow = !isLiked;
+        const updatedLikesCount = isLikedNow
+            ? likesCount + 1
+            : likesCount - 1;
+        setLikesCount(updatedLikesCount);
+        setIsLiked(isLikedNow);
 
         try {
             await axios.put(`/api/books/${_id}/like`, {}, {
@@ -79,32 +60,32 @@ const Book = ({
     const handleFollow = async() => {
         setIsUserFollowed(!isUserFollowed)
 
-        try {
-            if (isUserFollowed) {
-                await axios.put(`/api/users/${user._id}/unfollow`, {}, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    }
-                });
-                setUser(prev => ({
-                    ...prev,
-                    following: prev
-                        .following
-                        .filter(friend => friend !== user._id)
-                }))
-            } else {
-                await axios.put(`/api/users/${user._id}/follow`, {}, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    }
-                });
-                setUser((prev) => ({
-                    ...prev,
-                    following: [
-                        user._id, ...prev.following
-                    ]
-                }));
+        const requestConfig = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
             }
+        };
+
+        try {
+            const userId = user?.id
+            const requestUrl = `/api/users/${userId}/${isUserFollowed ? "unfollow" : "follow"}`
+
+            await axios.put(requestUrl, {}, requestConfig);
+
+            setUser((prev) => {
+                const updatedFollowing = isUserFollowed
+                    ? prev
+                        .following
+                        .filter((friend) => friend !== userId)
+                    : [
+                        userId, ...prev.following
+                    ];
+
+                return {
+                    ...prev,
+                    following: updatedFollowing
+                };
+            });
         } catch (error) {
             console.log(error)
         }
@@ -114,16 +95,13 @@ const Book = ({
         <div className="book">
             <div className="book-details">
                 <div className="img">
-                    <img
-                        src={`http://localhost:5000/images/${picture}`}
-                        alt=""/>
+                    <img src={`http://localhost:5000/images/${picture}`} alt=""/>
                 </div>
                 <div className="content">
                     <h3 className="title">{title}</h3>
                     <p className="author">{author}</p>
                     <div className="genres">
-                        {genres
-                            ?.map((genre, index) => (
+                        {genres?.map((genre, index) => (
                                 <div key={index} className="genre">
                                     {genre}
                                 </div>
@@ -135,8 +113,7 @@ const Book = ({
             <div className="user">
                 <div className="left">
                     Recommended by:
-                    <span>{user
-                            ?.name}</span>
+                    <span>{user?.name}</span>
                 </div>
                 <div onClick={handleFollow} className="follow">
                     {isUserFollowed
